@@ -1,0 +1,225 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    /* Ensure text color is white */
+    .table th, .table td {
+        color: white;
+    }
+
+    /* Optional: Style the buttons to make them larger and with clearer labels */
+    .btn-lg {
+        font-size: 1.25rem;
+        padding: 0.5rem 1rem;
+    }
+</style>
+<p>
+    <button class="btn btn-success btn-lg" id="btnAdd"><i class="fa fa-plus" aria-hidden="true"></i> Thêm Thể Loại</button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-ms-9">Tên Thể Loại</th>
+            <th class="col-ms-9 text-right">Các chức năng</th>
+        </tr>
+    </thead>
+    <tbody id="tblDsTheLoai"></tbody>
+</table>
+<!-- Modal hiển thị chi tiết Thể Loại -->
+<div class="modal fade" id="modalTheLoai" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- Header của Modal -->
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="modalTitle" style="color: white;"></div>
+
+                <!-- Body của Modal -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="text" id="maTL" value="" hidden />
+                        <label style="color: white;">Tên Thể Loại</label>
+                        <input type="text" class="form-control" id="txtTenTheLoai" placeholder="Tên Thể Loại" style="color: white; background-color: black;" />
+                    </div>
+                </div>
+
+                <!-- Footer của Modal -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnSubmit" style="color: white;">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: white;">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script {
+    <script>
+        $(document).ready(function () {
+            LoadTheLoai();
+        });
+
+        // Hàm LoadTheLoai để lấy danh sách Thể Loại và hiển thị lên bảng
+        function LoadTheLoai() {
+            $.ajax({
+                url: '/Admin/TheLoaiPhim/DsTheLoai', // Đường dẫn lấy dữ liệu JSON
+                type: 'get',
+                success: function (data) {
+                    $('#tblDsTheLoai').empty(); // Xóa các dòng dữ liệu cũ
+                    $.each(data.dsTL, function (k, v) { // Sử dụng dsTL từ kết quả trả về
+                        var s = '<tr id="' + v.MaTL + '">'; // Đặt id cho mỗi <tr> là MaTL
+                        s += '<td style="color: white;">' + v.TenTL + '</td>'; // Sử dụng TenTL thay vì TenChuDe
+                        s += '<td class="text-right">';
+                        s += '<button class="btn btn-info btn-lg" name="view" id="' + v.MaTL + '" style="color: white;"><i class="fa fa-info-circle" aria-hidden="true"></i> Xem</button>&nbsp;';
+                        s += '<button class="btn btn-warning btn-lg" name="update" id="' + v.MaTL + '" style="color: white;"><i class="fa fa-pencil-square" aria-hidden="true"></i> Sửa</button>&nbsp;';
+                        s += '<button class="btn btn-danger btn-lg" name="delete" id="' + v.MaTL + '" style="color: white;"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</button>';
+                        s += '</td>';
+                        s += '</tr>';
+                        $('#tblDsTheLoai').append(s); // Thêm dòng dữ liệu vào bảng
+                    });
+                }
+            });
+        }
+
+        // Sự kiện click vào nút "Lưu" để thêm mới hoặc cập nhật Thể Loại
+        $('#btnSubmit').click(function () {
+            let strTenTheLoai = $('#txtTenTheLoai').val().trim();
+            if (strTenTheLoai.length === 0) {
+                alert("Vui lòng nhập tên thể loại");
+                return;
+            }
+
+            let maTL = $('#maTL').val().trim();
+            if (maTL == 0) {
+                // Thêm mới
+                $.ajax({
+                    url: '/Admin/TheLoaiPhim/AddTheLoai',
+                    type: 'post',
+                    data: {
+                        strTenTL: strTenTheLoai
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            alert(data.msg);
+                            LoadTheLoai(); // Tải lại danh sách sau khi thêm mới
+                            $('#txtTenTheLoai').val(''); // Xóa nội dung trong input
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            } else {
+                // Cập nhật
+                $.ajax({
+                    url: '/Admin/TheLoaiPhim/Update',
+                    type: 'post',
+                    data: {
+                        maTL: maTL,
+                        strTenTL: strTenTheLoai
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            alert(data.msg);
+                            $('#modalTheLoai').modal('hide'); // Đóng modal sau khi cập nhật
+                            LoadTheLoai(); // Tải lại danh sách sau khi cập nhật
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Sự kiện click để hiển thị modal thêm mới Thể Loại
+        $('#btnAdd').click(function () {
+            $('#modalTitle').text('Thêm mới Thể Loại');
+            $('#maTL').val('');
+            $('#txtTenTheLoai').val('');
+            $('#txtTenTheLoai').prop('readonly', false); // Cho phép chỉnh sửa
+            $('#btnSubmit').show(); // Hiển thị nút Lưu
+            $('#modalTheLoai').modal('show'); // Hiển thị modal
+        });
+
+        // Click vào nút update để cập nhật dữ liệu
+        $(document).on('click', 'button[name="update"]', function () {
+            let idTL = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: '/Admin/TheLoaiPhim/Detail',
+                type: 'get',
+                data: {
+                    genresID: idTL
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        // Đưa dữ liệu lên modal
+                        $('#txtTenTheLoai').val(data.tl.TenCD);
+
+                        // Cho chỉnh sửa trên thẻ input
+                        $('#txtTenTheLoai').prop('readonly', false);
+
+                        // Hiển nút submit
+                        $('#btnSubmit').show();
+                        $('#modalTitle').text('Cập nhật Thể Loại');
+                        $('#maTL').val(idTL);
+                        $('#modalTheLoai').modal('show');
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        // Sự kiện click button xóa tại mỗi row của table
+        $(document).on('click', 'button[name="delete"]', function () {
+            let idTL = $(this).closest('tr').attr('id');
+            if (confirm("Bạn thực sự muốn xóa Thể Loại này?")) {
+                $.ajax({
+                    url: '/Admin/TheLoaiPhim/Delete',
+                    type: 'post',
+                    data: {
+                        maTL: idTL
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            alert(data.msg);
+                            LoadTheLoai(); // Cập nhật lại danh sách sau khi xóa
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Sự kiện click button chi tiết tại mỗi row của table:
+        $(document).on('click', 'button[name="view"]', function () {
+            let idTL = $(this).closest('tr').attr('id'); // Lấy id của <tr> chứa nút được nhấn
+            $.ajax({
+                url: '/Admin/TheLoaiPhim/Detail',
+                type: 'get',
+                data: {
+                    genresID: idTL
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        // Đưa dữ liệu lên modal
+                        $('#txtTenTheLoai').val(data.tl.TenCD);
+
+                        // Không cho chỉnh sửa trên thẻ input
+                        $('#txtTenTheLoai').prop('readonly', true);
+
+                        // Ẩn nút submit
+                        $('#btnSubmit').hide();
+
+                        // Đặt tiêu đề cho modal
+                        $('#modalTitle').text('Xem chi tiết Thể Loại');
+
+                        // Hiển thị modal
+                        $('#modalTheLoai').modal('show');
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+    </script>
+}

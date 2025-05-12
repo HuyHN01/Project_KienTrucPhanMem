@@ -1,0 +1,62 @@
+﻿@model LikeMovies.Models.Comments
+
+@{
+    ViewBag.Title = "Xóa Bình Luận";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-center text-danger">Xóa Bình Luận</h2>
+
+<h3 class="text-center">Bạn có chắc chắn muốn xóa bình luận này không?</h3>
+
+<div class="container">
+    <h4>Chi Tiết Bình Luận</h4>
+    <hr />
+
+    <div class="row">
+        <!-- Left Column for User Info and Comment Details -->
+        <div class="col-md-6">
+            <div class="row">
+                <!-- Avatar and Username -->
+                <div class="col-md-12 text-center mb-3">
+                    <img src="@Url.Content(Model.Users.AvatarURL)" alt="Avatar" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%;" />
+                    <br />
+                    <strong>@Html.DisplayFor(model => model.Users.UserName)</strong>
+                </div>
+
+                <!-- Comment Date and Text -->
+                <div class="col-md-12">
+                    <dt><strong>Ngày Bình Luận:</strong></dt>
+                    <dd>@Html.DisplayFor(model => model.DateCreated)</dd>
+
+                    <!-- Bình luận immediately below Ngày Bình Luận -->
+                    <dt><strong>Bình luận:</strong></dt>
+                    <dd>@Html.DisplayFor(model => model.CommentText)</dd>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column for Movie Details -->
+        <div class="col-md-6">
+            <div class="text-center">
+                <!-- Movie Thumbnail -->
+                <img src="@Url.Content(Model.Movies.Thumbnail)" alt="Movie Image" class="img-fluid" style="max-width: 200px; height: auto;" />
+                <p class="mt-2"><strong>@Html.DisplayFor(model => model.Movies.Title)</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-group text-center mt-4">
+        @using (Html.BeginForm("Delete", "BinhLuan", new { id = Model.CommentID }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này?');">Xóa</button>
+                <a href="@Url.Action("Index", "BinhLuan")" class="btn btn-secondary">Quay lại danh sách</a>
+            </div>
+        }
+    </div>
+</div>
+

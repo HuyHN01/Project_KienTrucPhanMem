@@ -1,0 +1,83 @@
+﻿@model LikeMovies.Models.Movies
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align: center; color: white;">Delete</h2>
+
+<h3 style="text-align: center;">Bạn có chắc muốn xóa phim này?</h3>
+<div style="text-align: center; margin-bottom: 20px;">
+    <img src="@Url.Content(Model.Thumbnail)" alt="Poster" style="max-width: 200px; max-height: 300px;" />
+</div>
+<div style="display: flex; justify-content: center;">
+    <div style="max-width: 800px;">
+        <h4>Movie</h4>
+        <hr />
+        <div style="display: flex; flex-wrap: wrap;">
+            <div style="flex: 1; padding-right: 20px;">
+                <dl class="dl-horizontal">
+                    <dt>Tên Phim</dt>
+                    <dd>@Html.DisplayFor(model => model.Title)</dd>
+                    <dt>Ngày phát hành</dt>
+                    <dd>@Html.DisplayFor(model => model.ReleaseDate)</dd>
+                    <dt>Loại phim</dt>
+                    <dd>
+                        @{
+                            var typeText = Model.Type == 0 ? "Phim chiếu rạp" : "Phim bộ";
+                        }
+                        @typeText
+                    </dd>
+                    <dt>Đạo diễn</dt>
+                    <dd>@Html.DisplayFor(model => model.Director)</dd>
+                </dl>
+            </div>
+            <div style="flex: 2;">
+                <dl class="dl-horizontal">
+                    <dt>Mô tả</dt>
+                    <dd>@Html.DisplayFor(model => model.Description)</dd>
+                </dl>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color" style="text-align: center; margin-top: 20px;">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .btn-danger {
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+            text-decoration: none;
+            color: white;
+        }
+</style>

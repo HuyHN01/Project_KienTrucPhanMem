@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace LikeMovie.Model.Entities
+namespace LikeMovie.DataAccess;
+
+[Table("AdminMovie")]
+public partial class AdminMovie
 {
-    public class AdminMovie
-    {
-        public int AdminID { get; set; }
-        public string NameAd { get; set; }
-        public string Email { get; set; }
-        public string UsernameAd { get; set; }
-        public string PasswordAd { get; set; }
-        public string AvartarURL { get; set; }
-    }
+    [Key]
+    [Column("AdminID")]
+    public int AdminId { get; set; }
+
+    [StringLength(60)]
+    public string? NameAd { get; set; }
+
+    [StringLength(50)]
+    public string? Email { get; set; }
+
+    [StringLength(100)]
+    public string UsernameAd { get; set; } = null!;
+
+    public string? PasswordAd { get; set; }
+
+    [Column("AvartarURL")]
+    [StringLength(200)]
+    public string? AvartarUrl { get; set; }
 }

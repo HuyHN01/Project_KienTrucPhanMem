@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="~/Images/logo.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/DangNhap.css")">
+</head>
+
+<body>
+    @using (Html.BeginForm("DangNhap", "LikeMovie", FormMethod.Post))
+    {
+        <div id="nav-login">
+            <div id="chu-login"><span>Đăng Nhập</span></div>
+            @if (Request.Cookies["TenDN"] != null && Request.Cookies["MatKhau"] != null)
+            {
+                <div id="ten-dang-nhap">
+                    <p>Tên đăng nhập:<ion-icon name="person-outline"></ion-icon></p>
+                    <div>
+                        @Html.TextBox("TenDN", Request.Cookies["TenDN"].Value)
+                        @ViewData["Err1"]
+                    </div>
+                </div>
+                <div id="mat-khau">
+                    <p>Mật khẩu:<ion-icon name="lock-closed-outline"></ion-icon></p>
+                    <div>
+                        @Html.Password("MatKhau", Request.Cookies["MatKhau"].Value)
+                        @ViewData["Err2"]
+                    </div>
+                    <p id="quen-mat-khau"><a href="#">Quên mật khẩu ?</a></p>
+                </div>
+            }
+            else
+            {
+                <div id="ten-dang-nhap">
+                    <p>Tên đăng nhập:<ion-icon name="person-outline"></ion-icon></p>
+                    <div>
+                        @Html.TextBox("TenDN") @ViewData["Err1"]
+                    </div>
+                </div>
+                <div id="mat-khau">
+                    <p>Mật khẩu:<ion-icon name="lock-closed-outline"></ion-icon></p>
+                    <div>
+                        @Html.Password("MatKhau") @ViewData["Err2"]
+                    </div>
+                    <p id="quen-mat-khau"><a href="@Url.Action("ForgotPassword", "User")">Quên mật khẩu ?</a></p>
+                </div>
+            }
+            <div>
+                @Html.CheckBox("remember") <span style="font-style:italic"> Ghi nhớ đăng nhập</span>
+            </div>
+            <div id="login-button">
+                @Html.Hidden("returnUrl", ViewBag.ReturnUrl as string)
+                <button type="submit"><span>Đăng Nhập</span></button>
+            </div>
+
+            <div id="login-other">
+                <p>Hoặc đăng nhập bằng</p>
+                <div>
+                    <a class="aaa" href="@ViewBag.response" style="--color:#FF0050">
+                        <img src="@Url.Content("~/Images/google_icon.png")" alt="Google" />
+                    </a>
+                    <a href='@Url.Action("LoginWithFacebook", "LikeMovie")' onclick='login();'><img src="@Url.Content("~/Images/facebook_icon.png")" alt="Facebook"/></a>
+                </div>
+            </div>
+            <div id="sign-up">
+                <p>Hoặc</p>
+                <p><a href="DangKy">Đăng Ký</a></p>
+            </div>
+        </div>
+    }
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+
+</html>

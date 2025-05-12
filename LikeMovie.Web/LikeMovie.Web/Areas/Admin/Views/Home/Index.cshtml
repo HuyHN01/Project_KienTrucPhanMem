@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .avatar-container img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .main-content {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .greeting {
+        font-size: 20px;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .btn-custom {
+        background-color: #FFA500;
+        color: whitesmoke;
+        border: 2px solid #856f6f;
+        border-radius: 6px;
+        margin: 10px;
+    }
+
+        .btn-custom:hover {
+            background-color: #ff6a00;
+        }
+
+    footer {
+        background-color: #000000;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-top: 2px solid #808080;
+        border-radius: 0px;
+    }
+    .user-info, .change-password-form, .otp-verification-form {
+        margin-top: 20px;
+        text-align: left;
+        background-color: #000000;
+        color: #fff;
+        padding: 15px;
+        border: 2px solid #808080;
+        border-radius: 6px;
+        width: 80%;
+        max-width: 400px;
+    }
+    .avatar-selection {
+        display: none;
+        margin-top: 20px;
+        background-color: #333;
+        padding: 15px;
+        border: 2px solid #808080;
+        border-radius: 6px;
+    }
+
+        .avatar-selection img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+</style>
+<div class="container main-content">
+    @if (Session["Admin"] != null)
+    {
+        var admin = (LikeMovies.Models.AdminMovie)Session["Admin"];
+        <div class="avatar-container">
+            <img src="@Url.Content(admin.AvartarURL)" alt="Avatar" id="avatarImage">
+        </div>
+        <div class="greeting">Xin chào: @admin.NameAd</div>
+
+        <div id="avatarSelection" class="avatar-selection">
+            @foreach (var file in System.IO.Directory.GetFiles(Server.MapPath("~/Images/Avatar/")))
+            {
+                var fileName = System.IO.Path.GetFileName(file);
+                <img src="@Url.Content("~/Images/Avatar/" + fileName)" alt="Avatar" data-filename="@fileName">
+            }
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-custom" href="@Url.Action("ChinhSuaThongTin", "User")">Chỉnh sửa thông tin</a>
+            <button class="btn btn-custom" id="changePasswordButton">Thay đổi mật khẩu</button>
+        </div>
+
+        <!-- Hiển thị thông tin người dùng dưới các nút hành động -->
+        <div id="userInfo" class="user-info">
+            <h4>Thông tin chi tiết:</h4>
+            <p><strong>Email:</strong> @admin.Email</p>
+            <p><strong>Vai trò:</strong> Quản trị viên</p>
+        </div>
+    }
+    else
+    {
+        <p>Vui lòng đăng nhập để xem thông tin cá nhân.</p>
+    }
+    </div>
+<script>
+    document.getElementById('avatarImage').addEventListener('click', function () {
+        document.getElementById('avatarSelection').style.display = 'block';
+    });
+
+    document.querySelectorAll('#avatarSelection img').forEach(function (img) {
+        img.addEventListener('click', function () {
+            var selectedFileName = this.getAttribute('data-filename');
+            $.ajax({
+                url: '@Url.Action("UpdateAvatar", "User")',
+                type: 'POST',
+                data: { fileName: selectedFileName },
+                success: function (response) {
+                    if (response.success) {
+                        document.getElementById('avatarImage').src = '@Url.Content("~/Images/Avatar/")' + selectedFileName;
+                        document.getElementById('avatarSelection').style.display = 'none';
+                    } else {
+                        alert('Failed to update avatar.');
+                    }
+                }
+            });
+        });
+    });
+    document.getElementById('changePasswordButton').addEventListener('click', function () {
+        document.getElementById('userInfo').style.display = 'none';
+        document.getElementById('changePasswordForm').style.display = 'block';
+    });
+</script>

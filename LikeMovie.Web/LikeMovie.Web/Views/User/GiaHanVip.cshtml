@@ -1,0 +1,44 @@
+﻿
+@model IEnumerable<LikeMovies.Models.SubscriptionPlanViewModel>
+@{
+    ViewBag.Title = "GiaHanVip";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 style="margin-top:100px;color:whitesmoke">Gia hạn VIP</h2>
+<div class="container">
+    <div class="row">
+        @foreach (var plan in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">@plan.PlanName</h5>
+                        <p class="card-text">
+                            Giá: @plan.Price VND<br />
+                            Thiết bị giới hạn: @plan.DevicesLimit<br />
+                            Không quảng cáo: @(plan.AdFree ? "Có" : "Không")<br />
+                            Truy cập nội dung VIP: @(plan.VipContentAccess ? "Có" : "Không")
+                        </p>
+                        @using (Html.BeginForm("GiaHanVip", "User", FormMethod.Post))
+                        {
+                            @Html.Hidden("PlanID", plan.planID)
+                            <div class="form-group">
+                                <label for="SubscriptionDuration">Thời gian gia hạn (tháng):</label>
+                                <input type="number" name="SubscriptionDuration" class="form-control" min="1" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="thanhtoan">Phương thức thanh toán:</label>
+                                <select name="thanhtoan" class="form-control">
+                                    <option value="1">VNPAY</option>
+                                    <option value="2">MoMo</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gia hạn</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@model LikeMovies.Models.PosterMovie
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken() <!-- Thêm mã này để sinh mã chống giả mạo -->
+    @Html.HiddenFor(m => m.PosterID)
+    <div>
+        <label>Movie</label>
+        @Html.DropDownList("MovieID", ViewBag.Movies as List<SelectListItem>, "Select Movie", new { @disabled = "disabled" })
+    </div>
+    <div>
+        <label>Poster URL</label>
+        @Html.TextBoxFor(m => m.PosterURL)
+    </div>
+    <div>
+        <label>Order</label>
+        @Html.TextBoxFor(m => m.SliderOrder)
+    </div>
+    <input type="submit" value="Update" />
+}

@@ -6,12 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LikeMovie.DataAccess;
 
-[Table("WatchHistory")]
-public partial class WatchHistory
+public partial class Favorite
 {
     [Key]
-    [Column("HistoryID")]
-    public int HistoryId { get; set; }
+    [Column("FavoriteID")]
+    public int FavoriteId { get; set; }
 
     [Column("MovieID")]
     public int MovieId { get; set; }
@@ -19,16 +18,11 @@ public partial class WatchHistory
     [Column("UserID")]
     public int UserId { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime? DateWatched { get; set; }
-
-    public int? Progress { get; set; }
-
     [ForeignKey("MovieId")]
-    [InverseProperty("WatchHistories")]
+    [InverseProperty("Favorites")]
     public virtual Movie Movie { get; set; } = null!;
 
     [ForeignKey("UserId")]
-    [InverseProperty("WatchHistories")]
+    [InverseProperty("Favorites")]
     public virtual User User { get; set; } = null!;
 }

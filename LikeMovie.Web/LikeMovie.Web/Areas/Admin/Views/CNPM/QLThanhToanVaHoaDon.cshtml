@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Quản Lý Thanh Toán và Hóa Đơn";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Tiêu đề trang -->
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary"><i class="fa fa-file-invoice-dollar"></i> Quản Lý Thanh Toán và Hóa Đơn</h2>
+        <!-- Nút thêm giao dịch thanh toán -->
+        <a href="#" class="btn btn-success"><i class="fa fa-plus"></i> Thêm Giao Dịch</a>
+    </div>
+</div>
+
+<!-- Bảng hiển thị danh sách thanh toán và hóa đơn -->
+<div class="container">
+    <table class="table table-hover table-bordered text-center">
+        <thead class="bg-dark text-light">
+            <tr>
+                <th>STT</th>
+                <th>Mã Giao Dịch</th>
+                <th>Khách Hàng</th>
+                <th>Số Tiền (VNĐ)</th>
+                <th>Ngày Thanh Toán</th>
+                <th>Phương Thức</th>
+                <th>Trạng Thái</th>
+                <th>Chức Năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dữ liệu mẫu -->
+            <tr>
+                <td>1</td>
+                <td>GD123456</td>
+                <td>Nguyễn Văn A</td>
+                <td>2,000,000</td>
+                <td>2024-06-15</td>
+                <td>Chuyển Khoản</td>
+                <td>
+                    <span class="badge bg-success">Đã Thanh Toán</span>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Xem</a>
+                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                    <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>GD123457</td>
+                <td>Trần Thị B</td>
+                <td>5,000,000</td>
+                <td>2024-06-16</td>
+                <td>Tiền Mặt</td>
+                <td>
+                    <span class="badge bg-warning text-dark">Chờ Xử Lý</span>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Xem</a>
+                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                    <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>GD123458</td>
+                <td>Lê Văn C</td>
+                <td>10,000,000</td>
+                <td>2024-06-17</td>
+                <td>Chuyển Khoản</td>
+                <td>
+                    <span class="badge bg-danger">Thất Bại</span>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Xem</a>
+                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                    <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a>
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>GD123459</td>
+                <td>Phạm Thị D</td>
+                <td>8,000,000</td>
+                <td>2024-06-18</td>
+                <td>Tiền Mặt</td>
+                <td>
+                    <span class="badge bg-success">Đã Thanh Toán</span>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Xem</a>
+                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                    <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Hiển thị phân trang -->
+<div class="container d-flex justify-content-end">
+    <nav>
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>
+<style>
+    .table td, .table th {
+        color: #f8f9fa !important; /* Màu trắng sáng rõ nét */
+    }
+
+    /* Chữ trong phần header */
+    .table thead th {
+        color: #ffc107 !important; /* Màu vàng nổi bật */
+    }
+
+    /* Màu chữ cho loại gói (nút Miễn Phí, Trả Phí) */
+    .table td span {
+        color: #000 !important; /* Chữ đậm trên nền màu */
+    }
+
+    /* Phần mô tả trong bảng */
+    .table tbody tr td:nth-child(4) {
+        color: #f8f9fa !important; /* Màu chữ sáng */
+    }
+</style>

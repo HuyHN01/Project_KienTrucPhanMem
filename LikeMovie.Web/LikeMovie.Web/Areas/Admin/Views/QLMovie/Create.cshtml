@@ -1,0 +1,111 @@
+﻿@model LikeMovies.Models.Movies
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Create", "QLMovie", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!-- Tên Phim -->
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                Tên Phim
+            </label>
+            <div class="col-md-10">
+                <input type="text" size="70" name="sTenPhim" value="@ViewBag.TenPhim" required />
+            </div>
+        </div>
+
+        <!-- Mô tả -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Mô tả</label>
+            <div class="col-md-10">
+                <textarea name="sMoTa" id="mota" rows="5">@ViewBag.MoTa</textarea>
+            </div>
+        </div>
+
+        <!-- Ảnh bìa -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Ảnh bìa</label>
+            <div class="col-md-10">
+                <input type="file" name="fFileUpload" />
+                @ViewBag.ThongBao
+            </div>
+        </div>
+
+        <!-- Ngày công chiếu -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Ngày công chiếu</label>
+            <div class="col-md-10">
+                <input type="date" name="dNgayCongChieu" required />
+            </div>
+        </div>
+
+        <!-- Thời lượng -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Thời lượng</label>
+            <div class="col-md-10">
+                <input type="number" min="1" required name="iThoiLuong" value="@ViewBag.ThoiLuong" />
+            </div>
+        </div>
+
+        <!-- Đạo diễn -->
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                Đạo diễn
+            </label>
+            <div class="col-md-10">
+                <input type="text" size="70" name="sDaoDien" value="@ViewBag.DaoDien" required />
+            </div>
+        </div>
+
+
+        <!-- TrailerURL -->
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                TrailerURL
+            </label>
+            <div class="col-md-10">
+                <input type="text" size="70" name="sTrailerUrl" value="@ViewBag.TrailerUrl" required />
+            </div>
+        </div>
+
+        <!-- MovieURL -->
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                MovieURL
+            </label>
+            <div class="col-md-10">
+                <input type="text" size="70" name="sMovieUrl" value="@ViewBag.MovieUrl" required />
+            </div>
+        </div>
+
+        <!-- Loại Phim (Type) -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Loại phim</label>
+            <div class="col-md-10">
+                <select name="iLoaiPhim" class="form-control">
+                    <option value="0" @(ViewBag.LoaiPhim == 0 ? "selected" : "")>Phim chiếu rạp</option>
+                    <option value="1" @(ViewBag.LoaiPhim == 1 ? "selected" : "")>Phim bộ</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm mới" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("VỀ TRANG QUẢN LÝ SÁCH", "Index")
+</div>

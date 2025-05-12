@@ -1,0 +1,69 @@
+﻿@model IEnumerable<LikeMovies.Models.Movies>
+@{
+    ViewBag.Title = "Danh Sách Phim Theo Thể Loại";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h1>Danh Sách Phim Theo Thể Loại</h1>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p> <!-- Hiển thị thông báo nếu không có phim -->
+}
+
+<div class="all-container">
+    @Html.Action("PartialNoiBat", "DanhMucPhim")
+    <div class="main-container">
+        <!-- Phần chứa phim -->
+        <div class="container-movies">
+            <div class="dieu-huong">
+                <h2>
+                    @if (ViewBag.SelectedGenre != null)
+                    {
+                        var selectedGenre = (ViewBag.Genres as List<LikeMovies.Models.Genres>).FirstOrDefault(g => g.GenreID == ViewBag.SelectedGenre);
+                        if (selectedGenre != null)
+                        {
+                            @selectedGenre.Name <!-- Hiển thị tên thể loại phim người dùng đã chọn -->
+                        }
+                    }
+                    else
+                    {
+                        <text>Danh Sách Phim Theo Thể Loại</text> <!-- Tiêu đề mặc định nếu không có thể loại chọn -->
+                    }
+                </h2>
+                <div>
+                    <div><a href="@Url.Action("PhimTheoTheLoai", new { genreId = ViewBag.SelectedGenre, sortBy = "rating" })" class="sort-link" id="ratingLink">Đánh giá</a></div>
+                    <div><a href="@Url.Action("PhimTheoTheLoai", new { genreId = ViewBag.SelectedGenre, sortBy = "view" })" class="sort-link" id="viewLink">Lượt xem</a></div>
+                    <div><a href="@Url.Action("PhimTheoTheLoai", new { genreId = ViewBag.SelectedGenre, sortBy = "favorite" })" class="sort-link" id="favoriteLink">Yêu thích</a></div>
+                </div>
+            </div>
+
+            <!-- Hiển thị các bộ phim -->
+            <div class="hien-thi-phim">
+                @foreach (var movie in Model)
+                {
+                    <div class="movies">
+                        <div class="anh-phim-1">
+                            <a href="@Url.Action("ChiTietPhim", "Phim", new { id = movie.MovieID })"><img src="@Url.Content(movie.Thumbnail)" alt="@movie.Title"></a>
+                        </div>
+                        <div class="playButton"><img src="/Images/play-button.png" alt="Play"></div>
+                        <div class="gioithieusoluoc">
+                            <div class="nameOfMovies"><span>@movie.Title</span></div>
+                            <div class="danh-gia">
+                                <img src="/Images/star.png" alt="Star">
+                                <span>@movie.Rating</span> <!-- Hiển thị rating -->
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Phần Bảng Xếp Hạng -->
+        <div class="aside">
+            @Html.Action("PartialBXH", "DanhMucPhim")
+            <!-- Phần Sắp Ra Mắt -->
+            @Html.Action("PartialSapRaMat", "DanhMucPhim")
+        </div>
+    </div>
+</div>

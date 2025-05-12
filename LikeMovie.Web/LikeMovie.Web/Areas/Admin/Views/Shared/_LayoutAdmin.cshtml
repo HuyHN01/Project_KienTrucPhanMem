@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/css")
+    <link rel="shortcut icon" href="~/Images/logo.jpg">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style type="text/css">
+        body {
+            font-family: 'Times New Roman';
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #000000;
+            color: #fff;
+            margin: 0;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+            background-color: #000000 !important;
+            border: 2px solid #808080;
+            border-radius: 0px;
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+
+            .navbar-brand:hover, .nav-link:hover {
+                color: #FFA500 !important;
+            }
+
+        .avatar-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .greeting {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            align-content: center;
+            text-align: center;
+            border-top: 2px solid #808080;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="@Url.Action("Index", "LikeMovie")">LikeMovies</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "QLMovie")">Quản lý phim</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("ThongKeVaBaoCao", "CNPM")">Quản lý Thống Kê Và Báo Cáo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("QLGoiDichVu", "CNPM")">Quản lý Gói Dịch Vụ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("QLThanhToanVaHoaDon", "CNPM")">Quản lý Thanh Toán Và Hóa Đơn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("QLTaiKhoanNV", "CNPM")">Quản lý Tài Khoản Nhân Viên</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("QLQuangCao", "CNPM")">Quản lý Quảng Cáo</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                @if (Session["Admin"] != null)
+                {
+                    var khachHang = (LikeMovies.Models.Users)Session["TaiKhoan"];
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("DangXuat", "Home")">Đăng xuất</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("DangNhap", "Home")"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div style="text-align:center;">
+            <p>ADMIN</p>
+        </div>
+    </footer>
+
+    @RenderSection("script", required: false)
+</body>
+</html>

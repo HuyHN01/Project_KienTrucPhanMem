@@ -1,0 +1,173 @@
+﻿@model LikeMovies.Models.Movies
+
+@{
+    ViewBag.Title = "Chỉnh sửa Phim";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="form-container">
+    <h2 class="text-center my-4">Chỉnh sửa Phim</h2>
+
+    @using (Html.BeginForm("Edit", "QLMovie", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.MovieID)
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Ảnh bìa -->
+                <div class="form-group">
+                    <label class="form-label">Ảnh bìa</label>
+                    @if (!string.IsNullOrEmpty(Model.Thumbnail))
+                    {
+                        <div>
+                            <img src="@Url.Content("~/" + Model.Thumbnail)" alt="Thumbnail"
+                                 style="max-width: 100%; height: auto; margin-bottom: 10px;" />
+                            <p>Ảnh bìa hiện tại</p>
+                        </div>
+                    }
+                    <input type="file" name="FileUpload" class="form-control-file" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Tên phim -->
+                <div class="form-group">
+                    <label class="form-label">Tên phim</label>
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Nhập tên phim" })
+                </div>
+
+                <!-- Ngày công chiếu -->
+                <div class="form-group">
+                    <label class="form-label">Ngày công chiếu</label>
+                    @Html.TextBoxFor(m => m.ReleaseDate, "{0:yyyy-MM-dd}",
+                        new { @class = "form-control", type = "date" })
+                </div>
+
+                <!-- Nội dung phim -->
+                <div class="form-group">
+                    <label class="form-label">Nội dung phim</label>
+                    @Html.TextAreaFor(m => m.Description,
+                        new { @class = "form-control", rows = 4, placeholder = "Nhập mô tả phim" })
+                </div>
+
+                <!-- Thời lượng -->
+                <div class="form-group">
+                    <label class="form-label">Thời lượng (phút)</label>
+                    @Html.TextBoxFor(m => m.Duration,
+                        new { @class = "form-control", type = "number", placeholder = "Nhập thời gian (phút)" })
+                </div>
+
+                    <label class="form-label">Cấp VIP</label>
+                <!-- Đạo diễn -->
+                <div class="form-group">
+                    <label class="form-label">Đạo diễn</label>
+                    @Html.TextBoxFor(m => m.Director,
+                        new { @class = "form-control", placeholder = "Nhập tên đạo diễn" })
+                </div>
+
+                <!-- Trailer URL -->
+                <div class="form-group">
+                    <label class="form-label">Trailer URL</label>
+                    @Html.TextBoxFor(m => m.TrailerURL,
+                        new { @class = "form-control", placeholder = "Nhập URL trailer" })
+                </div>
+
+                <!-- Movie URL -->
+                <div class="form-group">
+                    <label class="form-label">Movie URL</label>
+                    @Html.TextBoxFor(m => m.MovieURL,
+                        new { @class = "form-control", placeholder = "Nhập URL phim" })
+                </div>
+
+                <!-- Loại phim -->
+                <div class="form-group">
+                    <label class="form-label">Loại Phim</label>
+                    @Html.DropDownList("Type",
+                        (IEnumerable<SelectListItem>)ViewBag.Genres,
+                        "Chọn loại phim",
+                        new { @class = "form-control", @id = "Type" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Nút hành động -->
+        <div class="form-group text-center my-4">
+            <button type="submit" class="btn btn-primary btn-lg">Lưu thay đổi</button>
+            <a href="@Url.Action("Index", "QLMovie")" class="btn btn-secondary btn-lg ml-2">Hủy</a>
+        </div>
+    }
+</div>
+
+<style>
+    body {
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    .form-container {
+        background-color: #343a40;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    h2 {
+        color: white;
+        font-size: 28px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: white;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+    }
+
+    .form-control-file {
+        padding: 8px;
+        margin-bottom: 15px;
+    }
+
+    .btn-lg {
+        font-size: 16px;
+        padding: 12px 25px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .my-4 {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>

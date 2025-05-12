@@ -1,0 +1,134 @@
+﻿@using LikeMovies.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<LikeMovies.Models.Movies>
+@helper Truncate(string s, int length)
+{
+    if (s.Length < length)
+    {
+        @s
+    }
+    else
+    {
+        @s.Substring(0, length)<text>...</text>
+    }
+}
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center; color: white;">Quản lý phim</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-dark table-bordered">
+    <thead>
+        <tr>
+            <th>Tên phim</th>
+            <th>Nội dung</th>
+            <th>Poster</th>
+            <th>Ngày phát hành</th>
+            <th>Thể loại</th>
+            <th>Đạo diễn</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Truncate(item.Title, 50)</td>
+                <td>@Html.Raw(Truncate(item.Description, 70).ToString())</td>
+                <td>
+                    <img src="@Url.Content(item.Thumbnail)" alt="Poster" style="max-width: 100px; max-height: 120px;" />
+                </td>
+                <td>@Html.FormatValue(@item.ReleaseDate, "{0:dd/MM/yyyy}")</td>
+                <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                <td>@Html.DisplayFor(modelItem => item.Director)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MovieID }, new { @class = "btn btn-secondary btn-sm" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MovieID }, new { @class = "btn btn-info btn-sm" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MovieID }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+<style>
+    body {
+        color: white;
+    }
+    .MenuTrang {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .pagination {
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+        border-radius: 0.25rem;
+    }
+    .pagination a, .pagination span {
+        color: white !important;
+        background-color: #343a40;
+        border: 1px solid #dee2e6;
+        padding: 0.5rem 0.75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        text-decoration: none;
+    }
+    .pagination a:hover {
+        background-color: #495057;
+    }
+    .pagination .active a, .pagination .active a:hover, .pagination .active span, .pagination .active span:hover {
+        z-index: 3;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-custom {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        background-color: #5bc0de;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #fff;
+        text-decoration: none;
+    }
+    .btn-edit {
+        background-color: #5bc0de;
+    }
+    .btn-details {
+        background-color: #5cb85c;
+    }
+    .btn-delete {
+        background-color: #d9534f;
+    }
+    .btn-custom:hover {
+        color: #fff;
+        background-color: #31b0d5;
+        border-color: #269abc;
+    }
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+        word-wrap: break-word;
+    }
+</style>

@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<p>
+    <button class="btn btn-success" id="btnAdd">
+        <i class="fa fa-plus" aria-hidden="true"></i> Thêm Chủ Đề
+    </button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-ms-9">Tên Chủ Đề</th>
+            <th class="col-ms-9 text-right">Các chức năng</th>
+        </tr>
+    </thead>
+    <tbody id="tblDsChuDe">
+    </tbody>
+</table>
+
+<!-- Modal hiển thị chi tiết Chủ Đề -->
+<div class="modal fade" id="modalChuDe" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- Header của Modal -->
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="modalTitle"></div>
+
+                <!-- Body của Modal -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="text" id="maCD" value="" hidden />
+                        <label>Tên chủ đề</label>
+                        <input type="text" class="form-control" id="txtTenChuDe" placeholder="Tên chủ đề" />
+                    </div>
+                </div>
+
+                <!-- Footer của Modal -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnSubmit">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script {
+    <script>
+        $(document).ready(function () {
+            LoadChuDe();
+        });
+
+        // Hàm LoadChuDe để lấy danh sách Chủ Đề và hiển thị lên bảng
+        function LoadChuDe() {
+            $.ajax({
+                url: '/Admin/ChuDe/DsChuDe', // Đường dẫn lấy dữ liệu JSON
+                type: 'get',
+                success: function (data) {
+                    $('#tblDsChuDe').empty(); // Xóa các dòng dữ liệu cũ
+                    $.each(data.dsCD, function (k, v) { // Sử dụng dsCD từ kết quả trả về
+                        var s = '<tr id="' + v.MaCD + '">'; // Đặt id cho mỗi <tr> là MaCD
+                        s += '<td>' + v.TenCD + '</td>'; // Sử dụng TenCD thay vì TenChuDe
+                        s += '<td class="text-right">';
+                        s += '<button class="btn btn-info" name="view" id="' + v.MaCD + '"><i class="fa fa-info-circle" aria-hidden="true"></i></button>&nbsp;';
+                        s += '<button class="btn btn-warning" name="update" id="' + v.MaCD + '"><i class="fa fa-pencil-square" aria-hidden="true"></i></button>&nbsp;';
+                        s += '<button class="btn btn-danger" name="delete" id="' + v.MaCD + '"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                        s += '</td>';
+                        s += '</tr>';
+                        $('#tblDsChuDe').append(s); // Thêm dòng dữ liệu vào bảng
+                    });
+                }
+            });
+        }
+
+        // Sự kiện click vào nút "Lưu" để thêm mới hoặc cập nhật Chủ Đề
+        $('#btnSubmit').click(function () {
+            let strTenChuDe = $('#txtTenChuDe').val().trim();
+            if (strTenChuDe.length === 0) {
+                alert("Vui lòng nhập tên chủ đề");
+                return;
+            }
+
+            let maCD = $('#maCD').val().trim();
+            if (maCD == 0) {
+                // Thêm mới
+                $.ajax({
+                    url: '/Admin/ChuDe/AddChuDe',
+                    type: 'post',
+                    data: {
+                        strTenCD: strTenChuDe
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            alert(data.msg);
+                            LoadChuDe(); // Tải lại danh sách sau khi thêm mới
+                            $('#txtTenChuDe').val(''); // Xóa nội dung trong input
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            } else {
+                // Cập nhật
+                $.ajax({
+                    url: '/Admin/ChuDe/Update',
+                    type: 'post',
+                    data: {
+                        maCD: maCD,
+                        strTenCD: strTenChuDe
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            alert(data.msg);
+                            $('#modalChuDe').modal('hide'); // Đóng modal sau khi cập nhật
+                            LoadChuDe(); // Tải lại danh sách sau khi cập nhật
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Sự kiện click để hiển thị modal thêm mới Chủ Đề
+        $('#btnAdd').click(function () {
+            $('#modalTitle').text('Thêm mới Chủ đề');
+            $('#maCD').val('');
+            $('#txtTenChuDe').val('');
+            $('#txtTenChuDe').prop('readonly', false); // Cho phép chỉnh sửa
+            $('#btnSubmit').show(); // Hiển thị nút Lưu
+            $('#modalChuDe').modal('show'); // Hiển thị modal
+        });
+
+        // Click vào nút update để cập nhật dữ liệu
+        $(document).on('click', 'button[name="update"]', function () {
+            let idCD = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: '/Admin/ChuDe/Detail',
+                type: 'get',
+                data: {
+                    maCD: idCD
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        // Đưa dữ liệu lên modal
+                        $('#txtTenChuDe').val(data.cd.TenChuDe);
+
+                        // Cho chỉnh sửa trên thẻ input
+                        $('#txtTenChuDe').prop('readonly', false);
+
+                        // Hiển nút submit
+                        $('#btnSubmit').show();
+                        $('#modalTitle').text('Cập nhật Chủ đề');
+                        $('#maCD').val(idCD);
+                        $('#modalChuDe').modal('show');
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        // Sự kiện click button xóa tại mỗi row của table
+        $(document).on('click', 'button[name="delete"]', function () {
+            let idCD = $(this).closest('tr').attr('id');
+            if (confirm("Bạn thực sự muốn xóa Chủ đề này?")) {
+                $.ajax({
+                    url: '/Admin/ChuDe/Delete',
+                    type: 'post',
+                    data: {
+                        maCD: idCD
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            alert(data.msg);
+                            LoadChuDe(); // Cập nhật lại danh sách sau khi xóa
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+
+
+        // Sự kiện click button chi tiết tại mỗi row của table:
+        $(document).on('click', 'button[name="view"]', function () {
+            let idCD = $(this).closest('tr').attr('id'); // Lấy id của <tr> chứa nút được nhấn
+            $.ajax({
+                url: '/Admin/ChuDe/Detail',
+                type: 'get',
+                data: {
+                    maCD: idCD
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        // Đưa dữ liệu lên modal
+                        $('#txtTenChuDe').val(data.cd.TenChuDe);
+
+                        // Không cho chỉnh sửa trên thẻ input
+                        $('#txtTenChuDe').prop('readonly', true);
+
+                        // Ẩn nút submit
+                        $('#btnSubmit').hide();
+
+                        // Đặt tiêu đề cho modal
+                        $('#modalTitle').text('Xem chi tiết Chủ đề');
+
+                        // Hiển thị modal
+                        $('#modalChuDe').modal('show');
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+    </script>
+}

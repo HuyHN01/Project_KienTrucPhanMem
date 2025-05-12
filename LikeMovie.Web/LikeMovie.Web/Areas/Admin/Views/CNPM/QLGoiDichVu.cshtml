@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "QLGoiDichVu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container" style="margin-top: 30px;">
+    <!-- Header -->
+    <h2 class="text-center mb-4" style="color: #ffc107; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+        <i class="fas fa-cogs"></i> Quản Lý Gói Dịch Vụ
+    </h2>
+
+    <!-- Add New Package Button -->
+    <div class="mb-4 text-right">
+        <button class="btn btn-success btn-lg shadow" data-toggle="modal" data-target="#createPackageModal">
+            <i class="fas fa-plus"></i> Thêm Gói Dịch Vụ
+        </button>
+    </div>
+
+    <!-- Table for Packages -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover text-center shadow-lg">
+            <thead class="bg-dark text-warning">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Gói</th>
+                    <th>Loại</th>
+                    <th>Giá (VNĐ)</th>
+                    <th>Mô Tả</th>
+                    <th>Chức Năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Gói Miễn Phí</td>
+                    <td><span class="badge badge-secondary">Miễn Phí</span></td>
+                    <td>0</td>
+                    <td>Truy cập nội dung giới hạn</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm shadow-sm"><i class="fas fa-edit"></i> Chỉnh sửa</button>
+                        <button class="btn btn-danger btn-sm shadow-sm"><i class="fas fa-trash-alt"></i> Xóa</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Gói Gia Đình</td>
+                    <td><span class="badge badge-info">Trả Phí</span></td>
+                    <td>150,000</td>
+                    <td>Truy cập tối đa 4 thiết bị</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm shadow-sm"><i class="fas fa-edit"></i> Chỉnh sửa</button>
+                        <button class="btn btn-danger btn-sm shadow-sm"><i class="fas fa-trash-alt"></i> Xóa</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Gói Đặc Biệt</td>
+                    <td><span class="badge badge-warning">Trả Phí</span></td>
+                    <td>300,000</td>
+                    <td>Truy cập tất cả nội dung và tính năng</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm shadow-sm"><i class="fas fa-edit"></i> Chỉnh sửa</button>
+                        <button class="btn btn-danger btn-sm shadow-sm"><i class="fas fa-trash-alt"></i> Xóa</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal for Creating a New Package -->
+<div class="modal fade" id="createPackageModal" tabindex="-1" role="dialog" aria-labelledby="createPackageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-light shadow">
+            <div class="modal-header">
+                <h5 class="modal-title text-warning" id="createPackageModalLabel"><i class="fas fa-plus-circle"></i> Thêm Gói Dịch Vụ</h5>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="packageName">Tên Gói</label>
+                        <input type="text" class="form-control" id="packageName" placeholder="Nhập tên gói dịch vụ">
+                    </div>
+                    <div class="form-group">
+                        <label for="packageType">Loại Gói</label>
+                        <select class="form-control" id="packageType">
+                            <option value="free">Miễn Phí</option>
+                            <option value="paid">Trả Phí</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="packagePrice">Giá (VNĐ)</label>
+                        <input type="number" class="form-control" id="packagePrice" placeholder="Nhập giá gói dịch vụ">
+                    </div>
+                    <div class="form-group">
+                        <label for="packageDescription">Mô Tả</label>
+                        <textarea class="form-control" id="packageDescription" rows="3" placeholder="Nhập mô tả"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-success"><i class="fas fa-save"></i> Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    body {
+        background-color: #1e1e2f;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .table {
+        background-color: #2b2b3a;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #343a40;
+    }
+
+    .btn-sm {
+        margin-right: 5px;
+    }
+
+    .badge {
+        font-size: 90%;
+        padding: 6px 10px;
+    }
+
+    .modal-content {
+        border-radius: 10px;
+    }
+
+    .btn-success, .btn-primary, .btn-danger {
+        font-weight: bold;
+    }
+
+    .shadow-sm:hover {
+        box-shadow: 0 4px 8px rgba(255, 193, 7, 0.6);
+    }
+    /* Chữ trong các ô của bảng */
+    .table td, .table th {
+        color: #f8f9fa !important; /* Màu trắng sáng rõ nét */
+    }
+
+    /* Chữ trong phần header */
+    .table thead th {
+        color: #ffc107 !important; /* Màu vàng nổi bật */
+    }
+
+    /* Màu chữ cho loại gói (nút Miễn Phí, Trả Phí) */
+    .table td span {
+        color: #000 !important; /* Chữ đậm trên nền màu */
+    }
+
+    /* Phần mô tả trong bảng */
+    .table tbody tr td:nth-child(4) {
+        color: #f8f9fa !important; /* Màu chữ sáng */
+    }
+
+
+</style>
+
+<!-- Dependencies -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
