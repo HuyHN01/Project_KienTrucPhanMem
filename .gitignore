@@ -1,0 +1,84 @@
+## ASP.NET Core
+# User-specific files
+.idea/
+.vs/
+.vscode/
+
+# User-specific files (Windows)
+Thumbs.db
+Desktop.ini
+
+# ASP.NET Core build files
+bin/
+obj/
+out/
+
+# ASP.NET Core temporary files
+wwwroot/
+node_modules/
+bower_components/
+
+# ASP.NET Core data protection keys (for development purposes)
+appsettings.Development.json
+
+# ASP.NET Core publish directory
+publish/
+
+# Visual Studio for Mac files
+.vscode/
+
+# Rider for JetBrains IDEs
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer logs
+*.cab
+*.msi
+*.msp
+
+# Windows Installer logs
+*.log
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Azure Functions
+local.settings.json
+
+# Windows Installer
+*.cab
+*.msi
+*.msm
+*.msp
+
+# npm packages
+node_modules/
+
+# JetBrains Rider
+.idea/
+
+# DotNet Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Resharper
+_ReSharper*
+
+# Folders from NuGet package restore
+.vs2017/
+.vs2019/
+
+# Windows Installer
+*.cab
+*.msi
+*.msm
+*.msp
