@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace LikeMovie.DataAccess;
+namespace LikeMovie.Model.Entities;
 
 public partial class DiscountCode
 {

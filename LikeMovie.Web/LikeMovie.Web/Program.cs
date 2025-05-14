@@ -2,9 +2,10 @@ using LikeMovie.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using LikeMovie.DataAccess;
-/*using LikeMovie.DataAccess.Interfaces;
+using LikeMovie.DataAccess.Interfaces;
 using LikeMovie.DataAccess.Repositories;
 using LikeMovie.Business.Interfaces;
+/*using LikeMovie.Business.Interfaces;
 using LikeMovie.Business.Services;*/
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,9 +19,23 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.AddDbContext<LikeMovieDbContext>(options => options.UseSqlServer(connectionString));
 
-/*builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+/*builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));*/
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ISubscriptionPlanRepository, SubscriptionPlanRepository>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IAdminMovieRepository, AdminMovieRepository>();
+builder.Services.AddScoped<IMenuRepository, MenuRepository>();
+builder.Services.AddScoped<IPosterMovieRepository, PosterMovieRepository>();
+builder.Services.AddScoped<IMenuRepository, MenuRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+
+builder.Services.AddAutoMapper(typeof(LikeMovie.Business.Mappings.MappingProfile).Assembly);
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+/*builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IUserService, UserService>();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using LikeMovie.Model.Entities;
 
 namespace LikeMovie.DataAccess;
 
