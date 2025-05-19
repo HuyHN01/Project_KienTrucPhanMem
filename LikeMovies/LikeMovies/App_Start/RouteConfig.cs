@@ -17,7 +17,8 @@ namespace LikeMovies
             routes.MapRoute(
                 name: "Trang Chu",
                 url: "TrangChu",
-                defaults: new { controller = "LikeMovie", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "LikeMovie", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "LikeMovies.Controllers" }
             );
             routes.MapRoute(
                  name: "phimtheotheloai",
@@ -34,22 +35,26 @@ namespace LikeMovies
             routes.MapRoute(
                name: "PhimChieuRap",
                url: "phim-chieu-rap",
-               defaults: new { controller = "DanhMucPhim", action = "PhimChieuRap", id = UrlParameter.Optional }
+               defaults: new { controller = "DanhMucPhim", action = "PhimChieuRap", id = UrlParameter.Optional },
+               namespaces: new[] { "LikeMovies.Controllers" }
             );
             routes.MapRoute(
                 name: "PhimBo",
                 url: "phim-bo",
-                defaults: new { controller = "DanhMucPhim", action = "PhimBo", id = UrlParameter.Optional }
+                defaults: new { controller = "DanhMucPhim", action = "PhimBo", id = UrlParameter.Optional },
+                namespaces: new[] { "LikeMovies.Controllers" }
             );
             routes.MapRoute(
                 name: "PhimLe",
                 url: "phim-le",
-                defaults: new { controller = "DanhMucPhim", action = "PhimBo", id = UrlParameter.Optional }
+                defaults: new { controller = "DanhMucPhim", action = "PhimBo", id = UrlParameter.Optional },
+                namespaces: new[] { "LikeMovies.Controllers" }
             );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "LikeMovie", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "LikeMovies.Controllers" }
             );
         }
     }

@@ -1,0 +1,225 @@
+﻿@model IEnumerable<LikeMovies.Models.MENUs>
+
+<div class="notification" style="display: none;">
+    <h3>
+        Thông báo
+    </h3>
+</div>
+
+<header>
+    <nav id="container">
+        <div id="main-navbar_wrapper">
+            <!-- Logo -->
+            <div id="logo">
+                <a href="@Url.Action("Index", "LikeMovie")">
+                    <img src="@Url.Content("~/Images/logo1.jpg")" alt="Like Movies">
+                </a>
+            </div>
+
+            <!-- Main Menu -->
+            <div id="main-menu" class="active">
+                <ul>
+                    @{
+                        int i = 0;
+                        foreach (var item in Model)
+                        {
+                            if (ViewBag.lst[i] != 0)
+                            {
+                                if (@item.MenuName == "Phim Chiếu Rạp")
+                                {
+                                    <li class="dropdown">
+                                        <a href="@Url.Action("PhimChieuRap", "DanhMucPhim")" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            @item.MenuName <span class="caret"></span>
+                                        </a>
+                                        @Html.Action("LoadChildMenu", "LikeMovie", new { parentId = item.Id })
+                                    </li>
+                                }
+                                else if (@item.MenuName == "Phim Lẻ")
+                                {
+                                    <li class="dropdown">
+                                        <a href="@Url.Action("PhimBo", "DanhMucPhim")" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            @item.MenuName <span class="caret"></span>
+                                        </a>
+                                        @Html.Action("LoadChildMenu", "LikeMovie", new { parentId = item.Id })
+                                    </li>
+                                }
+                                else if (@item.MenuName == "Phim Bộ")
+                                {
+                                    <li class="dropdown">
+                                        <a href="@Url.Action("PhimBo", "DanhMucPhim")" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            @item.MenuName <span class="caret"></span>
+                                        </a>
+                                        @Html.Action("LoadChildMenu", "LikeMovie", new { parentId = item.Id })
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="dropdown">
+                                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            @item.MenuName <span class="caret"></span>
+                                        </a>
+                                        @Html.Action("LoadChildMenu", "LikeMovie", new { parentId = item.Id })
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                if (@item.MenuLink.Contains("://"))
+                                {
+                                    <li><a href="@item.MenuLink">@item.MenuName</a> </li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/@item.MenuLink">@item.MenuName</a> </li>
+                                }
+                            }
+                            i++;
+                        }
+                    }
+                </ul>
+            </div>
+
+            <!-- Right Menu -->
+            <div id="right-menu">
+                <div id="search-container">
+                    <a href="@Url.Action("Search", "SearchMovie")">
+                        <img class="icon" src="@Url.Content("~/Images/search.png")" alt="Search">
+                    </a>
+                </div>
+                <img class="icon" src="~/Images/notification_icon.png" alt="Notification">
+                <button type="button">
+                    <a href="@Url.Action("MuaVip","MuaVip")">
+                        <img class="icon" src="~/Images/Wallet_icon.png" alt="Wallet Icon">
+                    </a>
+                    <span>Mua Vip</span>
+                </button>
+                <ul class="nav navbar-nav">
+                    @if (Session["TaiKhoan"] != null)
+                    {
+                        var khachHang = (LikeMovies.Models.Users)Session["TaiKhoan"];
+                        <li class="dropdown">
+
+                            <a href="@Url.Action("Index", "User")" class="dropdown-toggle" data-toggle="dropdown" style="display: flex; align-items: center;">
+                                <span style="margin-left: 10px;">Xin chào: @khachHang.UserName</span>
+                                <b class="caret" style="margin-left: 20px;"></b>
+                                <img src="@Url.Content(khachHang.AvatarURL)" alt="Avatar" style="width: 30px; height: 30px; border-radius: 50%;">
+
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("DangNhap","Account")"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<style>
+    /* General styles for main menu */
+    #main-menu > ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex; /* Dùng flexbox để các item menu hiển thị theo hàng ngang */
+        justify-content: space-around; /* Căn giữa các item menu */
+    }
+
+        #main-menu > ul > li {
+            position: relative;
+            margin: 0 5px; /* Tạo khoảng cách giữa các item menu */
+        }
+
+            #main-menu > ul > li a {
+                display: block;
+                padding: 10px 15px; /* Tạo padding cho các item menu */
+                text-decoration: none;
+                color: #fff;
+                font-weight: bold;
+            }
+
+                /* Hover effect for menu items */
+                #main-menu > ul > li a:hover {
+                    background-color: #444;
+                    color: #ff6500;
+                }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        background-color: #222;
+        display: none;
+        list-style: none;
+        min-width: 150px;
+        border-radius: 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+        .dropdown-menu li {
+            padding: 10px;
+        }
+
+            .dropdown-menu li a {
+                color: #ddd;
+                text-decoration: none;
+            }
+
+                .dropdown-menu li a:hover {
+                    background-color: #444;
+                }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* Right Menu Styling */
+    #right-menu {
+        display: flex;
+        align-items: center;
+    }
+
+        #right-menu .icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 15px;
+        }
+
+        #right-menu button {
+            background-color: #333;
+            border: none;
+            padding: 5px 10px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            #right-menu button a {
+                display: flex;
+                align-items: center;
+            }
+
+            #right-menu button:hover {
+                background-color: #444;
+            }
+
+            #right-menu button span {
+                margin-left: 5px;
+            }
+
+</style>
+
+<script>
+    // Dropdown submenu toggle
+    $(document).ready(function () {
+        $('.dropdown-submenu a').on("click", function (e) {
+            const submenu = $(this).next('ul');
+            submenu.toggle(); // Toggle submenu visibility
+            e.stopPropagation(); // Prevent event propagation
+            e.preventDefault(); // Prevent default action
+        });
+    });
+</script>

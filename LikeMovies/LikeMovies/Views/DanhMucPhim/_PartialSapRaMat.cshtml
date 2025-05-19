@@ -1,0 +1,22 @@
+﻿@model IEnumerable<LikeMovies.Models.Movies>
+
+<h3 style="margin-top: 40px;">Sắp Ra Mắt</h3>
+<div class="bxh sap-ra-mat">
+    <!-- Lặp qua các phim sắp ra mắt -->
+    @foreach (var movie in ViewBag.ComingSoonMovies)
+    {
+        <div class="rank">
+            <div class="bxh-images">
+                <a href="@Url.Action("ChiTietPhim", "Phim", new { id = movie.MovieID })"><img src="@Url.Content(movie.Thumbnail)" alt="@movie.Title"></a>
+            </div>
+            <div class="bxh-infor srm-infor">
+                <a href="">@movie.Title</a>
+                <p>Ngày: @movie.ReleaseDate.ToString("dd/MM/yyyy")</p>
+                <div class="watch-trailer">
+                    <a href=""><img src="/Images/youtube_icon.png" alt="YouTube"></a>
+                    <a href=""><span>Xem Trailer</span></a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

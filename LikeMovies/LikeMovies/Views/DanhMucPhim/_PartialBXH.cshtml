@@ -1,0 +1,26 @@
+﻿@model IEnumerable<LikeMovies.Models.Movies>
+
+<h3>Bảng Xếp Hạng</h3>
+<div class="bxh">
+    @foreach (var rank in Model)
+    {
+        <div class="rank">
+            <div class="bxh-images">
+                <a href="@Url.Action("ChiTietPhim", "Phim", new { id = rank.MovieID })"><img src="@Url.Content(rank.Thumbnail)" alt="@rank.Title"></a>
+            </div>
+            <div class="bxh-infor">
+                <a href="">@rank.Title</a>
+                <div class="view-rate-like">
+                    <div class="vrt">
+                        <img src="/Images/eye.png" alt="View">
+                        <span>@rank.ViewCount</span>
+                    </div>
+                    <div class="vrt">
+                        <img src="/Images/ranking.png" alt="Ranking">
+                        <span>@rank.Rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

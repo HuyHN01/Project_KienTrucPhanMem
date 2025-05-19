@@ -1,0 +1,24 @@
+﻿@model IEnumerable<LikeMovies.Models.Movies>
+
+    <div class="banner-phim">
+        <div class="menu-banner">
+            <div class="tentheloaiphim">Nổi bật</div>
+        </div>
+        <div class="image-slider">
+            <!-- Các bộ phim Nổi bật -->
+            @foreach (var movie in Model.Take(8))
+            {
+            <div class="image-item">
+                <div class="image">
+                    <a href="@Url.Action("ChiTietPhim", "Phim", new { id = movie.MovieID })"><img src="@Url.Content(movie.Thumbnail)" alt="@movie.Title"></a>
+                </div>
+                <div class="playbutton">
+                    <img src="/Images/play-button.png" alt="Play">
+                </div>
+                <div class="tenphim">
+                    <a href="">@movie.Title</a>
+                </div>
+            </div>
+            }
+        </div>
+    </div>

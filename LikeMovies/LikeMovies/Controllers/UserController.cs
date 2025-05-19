@@ -67,7 +67,8 @@ namespace LikeMovies.Controllers
 
             return Json(new { success = false });
         }
-        public ActionResult ThayDoiMatKhau(string currentPassword, string newPassword, string confirmPassword)
+
+        public ActionResult ThayDoiMatKhau(string currentPassword, string newPassword, string confirmPassword, AccountController accountController)
         {
             if (newPassword != confirmPassword)
             {
@@ -78,7 +79,7 @@ namespace LikeMovies.Controllers
             var user = (Users)Session["TaiKhoan"];
             if (user != null)
             {
-                string hashedCurrentPassword = likeMovieController.HashPassword(currentPassword);
+                string hashedCurrentPassword = accountController.HashPassword(currentPassword);
 
                 if (user.PasswordHash != hashedCurrentPassword)
                 {
@@ -94,7 +95,7 @@ namespace LikeMovies.Controllers
                     // Fetch the email from the database
                     SendOtpEmail(user.UserID, otp);
 
-                    string hashedNewPassword = likeMovieController.HashPassword(newPassword);
+                    string hashedNewPassword = accountController.HashPassword(newPassword);
                     Session["NewPassword"] = hashedNewPassword;
                     Session["UserId"] = user.UserID;
 
@@ -260,7 +261,7 @@ namespace LikeMovies.Controllers
         }
 
         [HttpPost]
-        public ActionResult ResetPassword(string otp, string newPassword, string confirmPassword)
+        public ActionResult ResetPassword(string otp, string newPassword, string confirmPassword, AccountController accountController)
         {
             if (newPassword != confirmPassword)
             {
@@ -281,7 +282,7 @@ namespace LikeMovies.Controllers
                 var user = db.Users.Find(userId.Value);
                 if (user != null)
                 {
-                    user.PasswordHash = likeMovieController.HashPassword(newPassword);
+                    user.PasswordHash = accountController.HashPassword(newPassword);
                     db.SaveChanges();
 
                     // Clear the session

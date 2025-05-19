@@ -1,0 +1,173 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thông tin cá nhân</title>
+    <link rel="shortcut icon" href="~/Images/logo.jpg">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/IndexTTUser.css" />
+</head>
+<body>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Phần điều hướng -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="@Url.Action("Index", "LikeMovie")">LikeMovies</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                @if (Session["TaiKhoan"] != null)
+                {
+                    var khachHang = (LikeMovies.Models.Users)Session["TaiKhoan"];
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("DangXuat", "LikeMovie")">Đăng xuất</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("DangNhap", "LikeMovie")"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Phần nội dung chính -->
+    <div class="container main-content">
+        @if (Session["TaiKhoan"] != null)
+        {
+            var khachHang = (LikeMovies.Models.Users)Session["TaiKhoan"];
+            <div class="avatar-container">
+                <img src="@Url.Content(khachHang.AvatarURL)" alt="Avatar" id="avatarImage">
+            </div>
+            <div class="greeting">Xin chào: @khachHang.UserName</div>
+
+            <div id="avatarSelection" class="avatar-selection">
+                @foreach (var file in System.IO.Directory.GetFiles(Server.MapPath("~/Images/Avatar/")))
+                {
+                    var fileName = System.IO.Path.GetFileName(file);
+                    <img src="@Url.Content("~/Images/Avatar/" + fileName)" alt="Avatar" data-filename="@fileName">
+                }
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-custom" href="@Url.Action("ChinhSuaThongTin", "User")">Chỉnh sửa thông tin</a>
+                <button class="btn btn-custom" id="changePasswordButton">Thay đổi mật khẩu</button>
+                <a class="btn btn-custom" href="@Url.Action("GiaHanVip", "User")">Gia hạn VIP</a> <!-- Nút Gia hạn VIP -->
+            </div>
+
+            <!-- Hiển thị thông tin người dùng dưới các nút hành động -->
+            <div id="userInfo" class="user-info">
+                <h4>Thông tin chi tiết:</h4>
+                <p><strong>Email:</strong> @khachHang.Email</p>
+                <p><strong>Ngày tạo tài khoản:</strong> @khachHang.DateCreated</p>
+                <p><strong>Trạng thái tài khoản:</strong> @(khachHang.IsActive == true ? "Đang hoạt động" : "Không hoạt động")</p>
+                <p><strong>Vai trò:</strong> @(khachHang.Role == 1 ? "Quản trị viên" : "Người dùng")</p>
+                <p><strong>Cấp VIP:</strong>@khachHang.levelVIP</p>
+                <p><strong>Thời hạn VIP:</strong>@khachHang.TimeVIP</p>
+            </div>
+
+            <!-- Form thay đổi mật khẩu -->
+            <div id="changePasswordForm" class="change-password-form">
+                <h4>Thay đổi mật khẩu</h4>
+                <form action="@Url.Action("ThayDoiMatKhau", "User")" method="post">
+                    <div class="form-group">
+                        <label for="currentPassword">Mật khẩu hiện tại:</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Mật khẩu mới:</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Xác nhận mật khẩu:</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-custom">Đổi mật khẩu</button>
+                </form>
+            </div>
+
+            <!-- Form xác minh OTP -->
+            <div id="otpVerificationForm" class="otp-verification-form">
+                <h4>Xác minh OTP</h4>
+                <form action="@Url.Action("VerifyOtp", "User")" method="post">
+                    <div class="form-group">
+                        <label for="otp">Nhập mã OTP:</label>
+                        <input type="text" class="form-control" id="otp" name="otp" required>
+                        <small>Đã gửi tới: @khachHang.Email.Substring(0, 3)</small>
+                    </div>
+                    <button type="submit" class="btn btn-custom">Xác nhận</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <p>Vui lòng đăng nhập để xem thông tin cá nhân.</p>
+        }
+    </div>
+
+
+    <footer>
+        <p>&copy; 2024 LikeMovies. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('avatarImage').addEventListener('click', function () {
+            document.getElementById('avatarSelection').style.display = 'block';
+        });
+
+        document.querySelectorAll('#avatarSelection img').forEach(function (img) {
+            img.addEventListener('click', function () {
+                var selectedFileName = this.getAttribute('data-filename');
+                $.ajax({
+                    url: '@Url.Action("UpdateAvatar", "User")',
+                    type: 'POST',
+                    data: { fileName: selectedFileName },
+                    success: function (response) {
+                        if (response.success) {
+                            document.getElementById('avatarImage').src = '@Url.Content("~/Images/Avatar/")' + selectedFileName;
+                            document.getElementById('avatarSelection').style.display = 'none';
+                        } else {
+                            alert('Failed to update avatar.');
+                        }
+                    }
+                });
+            });
+        });
+        document.getElementById('changePasswordButton').addEventListener('click', function () {
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('changePasswordForm').style.display = 'block';
+        });
+
+        document.querySelector('form[action*="ThayDoiMatKhau"]').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            var formData = $(this).serialize();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        document.getElementById('changePasswordForm').style.display = 'none';
+                        document.getElementById('otpVerificationForm').style.display = 'block';
+                    } else {
+                        alert(response.message || 'Failed to send OTP.');
+                    }
+                },
+                error: function () {
+                    alert('Failed to send OTP.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

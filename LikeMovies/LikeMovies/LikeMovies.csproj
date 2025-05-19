@@ -211,16 +211,17 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BinhLuanController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CNPMController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLMovieController.cs" />
     <Compile Include="Areas\Admin\Controllers\SliderController.cs" />
     <Compile Include="Areas\Admin\Controllers\TheLoaiPhimController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DanhMucPhimController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LikeMovieController.cs" />
     <Compile Include="Controllers\MuaVipController.cs" />
+    <Compile Include="Controllers\OAuthServiceController.cs" />
     <Compile Include="Controllers\PhimController.cs" />
     <Compile Include="Controllers\SearchMovieController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -298,6 +299,10 @@
       <DependentUpon>Movie.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FacebookOAuthService.cs" />
+    <Compile Include="Services\GoogleOAuthService.cs" />
+    <Compile Include="Services\Interfaces\GoogleOAuthService.cs" />
+    <Compile Include="Services\Interfaces\IFacebookOAuthService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\body.css" />
@@ -693,11 +698,6 @@
     <Content Include="Areas\Admin\Views\Slider\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Slider\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Slider\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\CNPM\ThongKeVaBaoCao.cshtml" />
-    <Content Include="Areas\Admin\Views\CNPM\QLGoiDichVu.cshtml" />
-    <Content Include="Areas\Admin\Views\CNPM\QLThanhToanVaHoaDon.cshtml" />
-    <Content Include="Areas\Admin\Views\CNPM\QLTaiKhoanNV.cshtml" />
-    <Content Include="Areas\Admin\Views\CNPM\QLQuangCao.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -730,8 +730,8 @@
     <Content Include="Views\LikeMovie\Index.cshtml" />
     <Content Include="Views\LikeMovie\_PartialNav.cshtml" />
     <Content Include="Views\LikeMovie\_PartialFooter.cshtml" />
-    <Content Include="Views\LikeMovie\DangNhap.cshtml" />
-    <Content Include="Views\LikeMovie\DangKy.cshtml" />
+    <Content Include="Views\Account\DangNhap.cshtml" />
+    <Content Include="Views\Account\DangKy.cshtml" />
     <Content Include="Views\Phim\_PartialMoiPhatHanh.cshtml" />
     <Content Include="Views\Phim\_PartialHanhDong.cshtml" />
     <Content Include="Views\Phim\ChiTietPhim.cshtml" />
@@ -770,6 +770,7 @@
     <Folder Include="Areas\Admin\Views\BaseAdmin\" />
     <Folder Include="bin\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\OAuthService\" />
     <Folder Include="Views\ThanhToan\" />
   </ItemGroup>
   <ItemGroup>

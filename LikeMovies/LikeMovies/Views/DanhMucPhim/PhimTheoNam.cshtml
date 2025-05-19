@@ -1,0 +1,74 @@
+﻿@model IEnumerable<LikeMovies.Models.Movies>
+@{
+    ViewBag.Title = "Danh Sách Phim Theo Năm";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h1>
+    @if (ViewBag.SelectedYear != null)
+    {
+        <text>Danh Sách Phim @ViewBag.SelectedYear</text>
+    }
+    else
+    {
+        <text>Danh Sách Phim Theo Năm</text>
+    }
+</h1>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p> <!-- Hiển thị thông báo nếu không có phim -->
+}
+
+<div class="all-container">
+    @Html.Action("PartialNoiBat", "DanhMucPhim")
+    <div class="main-container">
+        <!-- Phần chứa phim -->
+        <div class="container-movies">
+            <div class="dieu-huong">
+                <h2>
+                    @if (ViewBag.SelectedYear != null)
+                    {
+                        <text>Danh Sách Phim @ViewBag.SelectedYear</text>
+                    }
+                    else
+                    {
+                        <text>Danh Sách Phim Theo Năm</text>
+                    }
+                </h2>
+                <div>
+                    <div><a href="@Url.Action("PhimTheoNam", new { year = ViewBag.SelectedYear, sortBy = "rating" })" class="sort-link" id="ratingLink">Đánh giá</a></div>
+                    <div><a href="@Url.Action("PhimTheoNam", new { year = ViewBag.SelectedYear, sortBy = "view" })" class="sort-link" id="viewLink">Lượt xem</a></div>
+                    <div><a href="@Url.Action("PhimTheoNam", new { year = ViewBag.SelectedYear, sortBy = "favorite" })" class="sort-link" id="favoriteLink">Yêu thích</a></div>
+                </div>
+            </div>
+
+            <!-- Hiển thị các bộ phim -->
+            <div class="hien-thi-phim">
+                @foreach (var movie in Model)
+                {
+                    <div class="movies">
+                        <div class="anh-phim-1">
+                            <a href="@Url.Action("ChiTietPhim", "Phim", new { id = movie.MovieID })"><img src="@Url.Content(movie.Thumbnail)" alt="@movie.Title"></a>
+                        </div>
+                        <div class="playButton"><img src="/Images/play-button.png" alt="Play"></div>
+                        <div class="gioithieusoluoc">
+                            <div class="nameOfMovies"><span>@movie.Title</span></div>
+                            <div class="danh-gia">
+                                <img src="/Images/star.png" alt="Star">
+                                <span>@movie.Rating</span> <!-- Hiển thị rating -->
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Phần Bảng Xếp Hạng -->
+        <div class="aside">
+            @Html.Action("PartialBXH", "DanhMucPhim")
+            <!-- Phần Sắp Ra Mắt -->
+            @Html.Action("PartialSapRaMat", "DanhMucPhim")
+        </div>
+    </div>
+</div>
