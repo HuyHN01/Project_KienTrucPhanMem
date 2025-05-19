@@ -1,0 +1,125 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+                /* Quy đinh phần body */
+body{
+    background-color: #000;
+}
+/* Màu nền, độ rộng của div body */
+#body{
+    width: 1180px;
+    height: auto;
+    background-color: #000;
+    margin-right: 40px;
+    margin-left: 70px;
+    margin-top: 43px;
+}
+                    /* Định dạng slick slider */
+/* Quy định kích thước ảnh phim */
+.image img{
+    width: 100%;
+    height: 100%;
+}
+.image {
+    display: inline-block;
+    width: 207px;
+    height: 310px;
+}
+.tenphim{
+    width: 207px;
+    height: auto;
+}
+.playbutton img{
+    width: 35px;
+    height: 35px;
+}
+.playbutton
+{
+    position: absolute;
+    top: 140px;
+    right: 105px;
+}
+/* Chỉnh liên kết phim */
+.image-item a{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+   
+}
+div.image img, div.image{
+    border-radius: 10px;
+}
+/* Quy định nút điều hướng */
+.slick-prev{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: white;
+    z-index: 2;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    font-size: 40px;
+}
+.slick-prev:hover{
+    border: solid;
+    border-color: black;
+}
+.slick-next{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: white;
+    z-index: 2;
+    right: 20px;
+    height: 50px;
+    width: 50px;
+    border: none;
+    font-size: 40px;
+}
+.slick-next:hover{
+    border: solid;
+    border-color: black;
+}
+
+/* CSS cho phần cha chứa slider phim */
+.menu-banner{
+    display: flex;
+    justify-content: space-between;
+}
+.tentheloaiphim{
+    color: white;
+    font: 500;
+    font-size: 30px;
+}
+.xemtatca a{
+    text-decoration: none;
+    color: white;
+    
+}
+.xemtatca{
+    padding-top:10px;
+}
+/* Tạo hiệu ứng rê chuột */
+.xemtatca a:hover{
+    cursor: pointer;
+    color: #ff6500;
+}
+.image-item:hover{
+    transform: scale(1.1);    
+}
+/* Khoảng cách giữa các banner phim */
+.banner-phim{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.slick-list:first-child{
+    height: 650px;
+}
+.slick-track{
+    height: 100%;
+}

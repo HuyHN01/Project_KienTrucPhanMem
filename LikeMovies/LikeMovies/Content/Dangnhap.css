@@ -1,0 +1,167 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    background-image: url('../Images/background_1.jpg');
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+    /* CSS cho phần khung chứa những thông tin đăng nhập */
+div#nav-login{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #00000096;
+    width: 400px;
+    border-radius: 20px;
+    height: 90%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+/* Chữ "Đăng Nhập" */
+div#chu-login{
+    padding-top: 10px ;
+}
+div#chu-login span{
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+}
+/* Phần tên đăng nhập */
+div#ten-dang-nhap{
+    width: 70%;
+    height: auto;
+}
+div#ten-dang-nhap p{
+    color: white;
+    font-weight: 500;
+}
+div#ten-dang-nhap div{
+    height: 35px;
+}
+div#ten-dang-nhap div input{
+    color: white;
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    height: 100%;
+    outline: none;
+}
+::placeholder{
+    font-size: 18px;
+}
+div#ten-dang-nhap div:hover{
+    border-bottom: solid 2px white;
+}
+/* Phần nhập mật khẩu */
+div#mat-khau{
+    width: 70%;
+    height: auto;
+}
+div#mat-khau p{
+    color: white;
+    font-weight: 500;
+}
+div#mat-khau div{
+    height: 45px;
+}
+div#mat-khau div input{
+    color: white;
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    height: 100%;
+    outline: none;
+}
+div#mat-khau div:hover{
+    border-bottom: solid 2px white;
+}
+/* Phần nút đăng nhập */
+div#login-button{
+    text-align: center;
+    width: 70%;
+    height: auto;
+}
+div#login-button button{
+    width: 70%;
+    border-radius: 20px;
+    background-color: black;
+    border: none;
+    padding: 5px 5px;
+    box-sizing: border-box;
+}
+div#login-button button:hover{
+    background-image: linear-gradient(114.88deg, #ff6500 0%, #e93013 97.15%);
+    transform: scale(1.09);
+}
+div#login-button button span{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+/* Phần Quên Mật Khẩu */
+p#quen-mat-khau{
+    padding-top: 10px;
+    width: 100%;
+    height: auto;
+    text-align: right;
+}
+p#quen-mat-khau a{
+    text-decoration: none;
+    color: white;
+}
+p#quen-mat-khau a:hover{
+    color: #F87022;
+}
+/* Phần đăng nhập bằng fb,gg,twitter */
+div#login-other{
+    width: 70%;
+    height: auto;
+    text-align: center;
+}
+div#login-other p{
+    padding-bottom: 10px ;
+    color: white;
+}
+div#login-other a{
+    padding: 5px;
+}
+div#login-other a img:hover{
+    transform: scale(1.05);
+}
+
+/* Phần liên kết tới trang đăng ký */
+div#sign-up{
+    text-align: center;
+    width: 70%;
+    height: auto;
+}
+div#sign-up p{
+    padding: 5px 0px;
+    color: white;
+}
+div#sign-up a{
+    text-decoration: none;
+    color: white;
+}
+div#sign-up a:hover{
+    transform: scale(1.05);
+    text-decoration: solid;
+    color: #F87022;
+}
+/* Chỉnh kích thước icon nhỏ lại */
+div#login-other>div a img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

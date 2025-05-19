@@ -1,0 +1,203 @@
+.search-body-container{
+    background-color: #000;
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 72px;
+}
+
+/* css cho phần search section */
+.search-area{
+    width: 100%;
+    height: 500px;
+    background-image: url(../Images/search-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.search-section{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 185px;
+}
+.search-section form div{
+    display: inline-block;
+}
+.search-section h3 {
+    color: white;
+    font-weight: bold;
+    font-size: 45px;
+}
+.search-section p{
+    margin-bottom: 20px;
+    color: #cac6c6;
+    font-size: 20px;
+    font-weight: 700;
+}
+.search-section>div form div{
+    margin-top: 10px ;
+}
+.search-section>div form div input{
+    color: white;
+    font-size: 18px;
+    padding-left: 20px;
+    width: 500px;
+    height: 35px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: #151515;
+} 
+.search-section>div form button:hover{
+    cursor: pointer;
+}
+.search-section>div form button:active{
+    border: solid gray 1px;
+    transform: scale(1.05);
+}
+.search-section>div form div button{
+    border-radius: 10px;
+    background-color: #D6661A;
+    height: 35px;
+    width: 100px;
+    border: none;
+
+}
+.search-section>div form div button span{
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+ /*CSS cho phần danh mục phim */
+/*div.search-category{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+div.search-category-items{
+    border-radius: 5px;
+    box-shadow: 10px -5px 40px -20px #d1c9c996;
+    width: 207px;
+    height: 116px;
+    position: relative;
+}
+div.search-category-items:hover{
+    box-sizing: border-box;
+    cursor: pointer;
+    border: solid 2px rgba(196, 190, 190, 0.845);
+}
+div.picture{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+div.picture img{
+    width: 100%;
+    height: 100%;
+}
+div.search-category-items div:last-child{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    z-index: 2;
+    top: 30px;
+}
+div.search-category-items span{
+
+    color: #ffffffbd;
+    font-weight: bold;
+    font-size: 30px;   
+}*/
+                /* CSS cho phần gợi ý tìm kiếm */
+div.goi-y-tim-kiem{
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+}
+/* Css cho phần xu hướng */
+div.xu-huong, div.tim-kiem-hang-dau{
+    display: inline-block;
+}
+div.xu-huong{
+    box-sizing: border-box;
+    padding-left: 26px;
+    width: 60%;
+    height: auto;
+}
+div.xu-huong ul li{
+    margin: 20px 0px;
+    display: flex;
+}
+
+div.xu-huong-image{
+    width: 160px;
+    height: 90px;
+}
+div.xu-huong-image img{
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+}
+div.xu-huong-image img:hover{
+    box-sizing: border-box;
+    border: solid 2px rgba(196, 190, 190, 0.845);
+}
+div.title a{
+    text-decoration: none;
+}
+div.title a:hover span{
+    color: #ff6500;
+}
+div.title span{
+    color: white;
+    font-weight: 500;
+    font-size: 17px;
+}
+div.infor{
+    width: 50%;
+    padding-left: 30px ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+div.infor div{
+    margin: 5px 0px;
+}
+div.infor div:last-child{
+    display: flex;
+    justify-content: space-between;
+}
+div.infor div:last-child p{
+    color: white
+}
+
+/* CSs cho phần tìm kiếm hàng đầu */
+div.tim-kiem-hang-dau{
+    padding-right: 25px;
+    float: right;
+    width: 40%;
+    height: auto;
+    box-sizing: border-box
+}
+div.tim-kiem-hang-dau ul li{
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 8px 10px;
+    border-radius: 10px;
+    background-color: #151515;
+}
+div.tim-kiem-hang-dau ul li:hover a{
+    color: #ff6500;
+}
+div.tim-kiem-hang-dau ul li a{
+    text-decoration: none;
+    color: white;
+}

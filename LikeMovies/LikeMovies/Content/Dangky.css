@@ -1,0 +1,158 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+html{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+body{
+    
+    width: 100%;
+    height: 100vh;
+    background-image: url(../Images/background_sign_up.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+div#container{
+    position: relative;
+    width: 1125px;
+    height:750px;
+    margin-top:20px;
+    background-image: url(../Images/container-bg.png);
+}
+        /*CSS Cho phần khung đăng ký*/
+div#nav-sign-up{
+    background-color: gray;
+    position: absolute;
+    right: 0;
+    top:137px;
+    height: 500px;
+    width: 500px;
+    background-color:#ffb3008e;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-around;    
+}
+/* Css cho phần tiêu đề khung đăng ký */
+div#chu-sign-up{
+    width: 100%;
+    height: auto;
+    text-align: left;
+    padding: 0px 30px;
+}
+div#chu-sign-up h3{
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+}
+div#chu-sign-up p{
+    color: white;
+    margin-top: 10px;
+}
+/* Css cho phần tên đăng nhập */
+div#ten-dang-nhap{
+    width: 100%;
+    height: 40px;
+    padding: 0px 30px;
+    
+}
+div#ten-dang-nhap input{
+    width: 80%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-bottom: solid white 1px;
+    background-color: transparent;
+}
+/* css email */
+div#email {
+    width: 100%;
+    height: 40px;
+    padding: 0px 30px;
+    border:none;
+}
+div#email input{
+    width: 80%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-bottom: solid white 1px;
+    background-color: transparent;
+}
+/* css  mật khẩu*/
+div#mat-khau{
+    width: 100%;
+    height: 40px;
+    padding: 0px 30px;
+    
+    border: none;
+   
+}
+div#mat-khau input{
+    width: 80%;
+    height: 100%;
+    border: none;
+    border-bottom: solid white 1px;
+    background-color: transparent;
+    outline: none;
+}
+/* css nhập lại mật khẩu */
+div#nhap-lai-mat-khau{
+    width: 100%;
+    height: 40px;
+    padding: 0px 30px;
+    border:none;
+}
+div#nhap-lai-mat-khau input{
+    width: 80%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-bottom: solid white 1px;
+    background-color: transparent;
+}
+/* Điều khoản sử dụng */
+div#agree-dksu{
+    width: 100%;
+    height: auto;
+    padding: 0px 30px;
+    color: rgb(80, 74, 74);
+}
+/* Nút đăng ký và đăng nhập */
+div#nut {
+    width: 100%;
+    height: auto;
+    text-align: left;
+    padding: 0px 30px;
+}
+div#nut button{
+    width: 30%;
+    height: auto;
+    border-radius: 20px;
+    background-color: #FF7700;
+    border: none;
+    padding: 5px 5px;
+    box-sizing: border-box;
+}
+div#nut button:hover{
+    background-image: linear-gradient(to right, #FBA02B, #F87022);
+    transform: scale(1.09);
+}
+div#nut button span{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+::placeholder{
+    color: white;
+    font-size: 16px;
+}
+input{
+    color: white;
+    font-size: 16px;
+}
+

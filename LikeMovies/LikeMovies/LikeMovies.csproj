@@ -1,0 +1,848 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C7BB5E1E-CD3D-4CD5-BD17-17D50164916D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LikeMovies</RootNamespace>
+    <AssemblyName>LikeMovies</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44310</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.9.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Dynamic.Core, Version=1.4.9.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.Core.1.4.9\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Json.9.0.0\lib\net462\System.Net.Http.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.9.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.9.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BinhLuanController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CNPMController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QLMovieController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SliderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TheLoaiPhimController.cs" />
+    <Compile Include="Controllers\DanhMucPhimController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LikeMovieController.cs" />
+    <Compile Include="Controllers\MuaVipController.cs" />
+    <Compile Include="Controllers\PhimController.cs" />
+    <Compile Include="Controllers\SearchMovieController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminMovie.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comments.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiscountCodes.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Episodes.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Favorites.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Genres.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MENUs.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MomoConfig.cs" />
+    <Compile Include="Models\MomoResponse.cs" />
+    <Compile Include="Models\Movie.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Movie.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Movie.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Movie.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Movie.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Movies.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PayCompare.cs" />
+    <Compile Include="Models\PayLib.cs" />
+    <Compile Include="Models\PaymentInfo.cs" />
+    <Compile Include="Models\Payments.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PosterMovie.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ratings.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Seasons.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubscriptionPlans.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubscriptionPlanViewModel.cs" />
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Util.cs" />
+    <Compile Include="Models\WatchHistory.cs">
+      <DependentUpon>Movie.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\body.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Dangky.css" />
+    <Content Include="Content\Dangnhap.css" />
+    <Content Include="Content\Gioithieuphim.css" />
+    <Content Include="Content\IndexTTUser.css" />
+    <Content Include="Content\MuaVip.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Payment.css" />
+    <Content Include="Content\search.css" />
+    <Content Include="Content\slick slider.css" />
+    <Content Include="Content\sortlink.css" />
+    <Content Include="Content\Sub-menu.css" />
+    <Content Include="Content\ThanhToan.css" />
+    <Content Include="Content\Xemtatcaphim.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\Anime\Demon_slayer_chuyen_tau_vo_tan.jpg" />
+    <Content Include="Images\Anime\dua_con_cua_thoi_tiet.jpg" />
+    <Content Include="Images\Anime\Jujutsu_kaisen_movie_0.jpg" />
+    <Content Include="Images\Anime\Khóa chặt cửa nào suzume.jpg" />
+    <Content Include="Images\Anime\Stand_by_me.jpg" />
+    <Content Include="Images\Anime\Stand_by_me_2.jpg" />
+    <Content Include="Images\Anime\ToToro.jpg" />
+    <Content Include="Images\Anime\Vung_dat_linh_hon.jpg" />
+    <Content Include="Images\Anime\Your_name.jpg" />
+    <Content Include="Images\Avatar\astronaut.png" />
+    <Content Include="Images\Avatar\bear.png" />
+    <Content Include="Images\Avatar\boy %281%29.png" />
+    <Content Include="Images\Avatar\boy %282%29.png" />
+    <Content Include="Images\Avatar\boy %283%29.png" />
+    <Content Include="Images\Avatar\boy.png" />
+    <Content Include="Images\Avatar\cat.png" />
+    <Content Include="Images\Avatar\chicken.png" />
+    <Content Include="Images\Avatar\cool.png" />
+    <Content Include="Images\Avatar\default_user.png" />
+    <Content Include="Images\Avatar\dinosaur.png" />
+    <Content Include="Images\Avatar\dog %281%29.png" />
+    <Content Include="Images\Avatar\dog.png" />
+    <Content Include="Images\Avatar\gamer.png" />
+    <Content Include="Images\Avatar\girl.png" />
+    <Content Include="Images\Avatar\hacker %281%29.png" />
+    <Content Include="Images\Avatar\hacker.png" />
+    <Content Include="Images\Avatar\hippopotamus.png" />
+    <Content Include="Images\Avatar\knight.png" />
+    <Content Include="Images\Avatar\man.png" />
+    <Content Include="Images\Avatar\ninja.png" />
+    <Content Include="Images\Avatar\panda.png" />
+    <Content Include="Images\Avatar\profile.png" />
+    <Content Include="Images\Avatar\puffer-fish.png" />
+    <Content Include="Images\Avatar\rabbit %281%29.png" />
+    <Content Include="Images\Avatar\rabbit.png" />
+    <Content Include="Images\Avatar\robot.png" />
+    <Content Include="Images\Avatar\shark.png" />
+    <Content Include="Images\Avatar\tiger.png" />
+    <Content Include="Images\Avatar\woman %281%29.png" />
+    <Content Include="Images\Avatar\woman %282%29.png" />
+    <Content Include="Images\Avatar\woman %283%29.png" />
+    <Content Include="Images\Avatar\woman %284%29.png" />
+    <Content Include="Images\Avatar\woman %285%29.png" />
+    <Content Include="Images\Avatar\woman %286%29.png" />
+    <Content Include="Images\Avatar\woman %287%29.png" />
+    <Content Include="Images\Avatar\woman.png" />
+    <Content Include="Images\background.jpg" />
+    <Content Include="Images\background_1.jpg" />
+    <Content Include="Images\background_sign_up.png" />
+    <Content Include="Images\Banner\avatar.jpg" />
+    <Content Include="Images\banner_overlay.png" />
+    <Content Include="Images\Category\Anime.jpg" />
+    <Content Include="Images\Category\Chiến Tranh.jpg" />
+    <Content Include="Images\Category\Hanh-đong.jpg" />
+    <Content Include="Images\Category\Hoat-Hinh.jpg" />
+    <Content Include="Images\Category\Khoa-hoc-vien-tuong.jpg" />
+    <Content Include="Images\Category\Kinh-di.jpg" />
+    <Content Include="Images\Category\phieu-luu.jpg" />
+    <Content Include="Images\Category\Trinh Thám.jpg" />
+    <Content Include="Images\Category\Tài-liệu.jpg" />
+    <Content Include="Images\Category\Võ Thuật.jpg" />
+    <Content Include="Images\cellphone_icon.png" />
+    <Content Include="Images\check-mark.png" />
+    <Content Include="Images\Chientranh\Dunkirk.jpg" />
+    <Content Include="Images\Chientranh\Midway.jpg" />
+    <Content Include="Images\Chientranh\Trân châu cảng.jpg" />
+    <Content Include="Images\chinh_sach_bao_mat_icon.png" />
+    <Content Include="Images\clock.png" />
+    <Content Include="Images\close.png" />
+    <Content Include="Images\Contact_icon\facebook-app-symbol.png" />
+    <Content Include="Images\Contact_icon\instagram.png" />
+    <Content Include="Images\Contact_icon\snapchat.png" />
+    <Content Include="Images\Contact_icon\twitter.png" />
+    <Content Include="Images\container-bg.png" />
+    <Content Include="Images\Dien_vien\Avatar_2\Britain Dalton.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\CLiff Curtis.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\Dương Tử Quỳnh.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\Kate Winslet.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\Sam Worthington.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\Signourney Weaver.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\Stephen Lang.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\Trinity Bliss.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\Vin Diesel.jpg" />
+    <Content Include="Images\Dien_vien\Avatar_2\Zoe Saldana.jpg" />
+    <Content Include="Images\Dien_vien\JujutsuKaisenMovie0\Gojo Satoru.jpg" />
+    <Content Include="Images\Dien_vien\JujutsuKaisenMovie0\Suguru Geto.png" />
+    <Content Include="Images\Dien_vien\JujutsuKaisenMovie0\Yuta Okkotsu.jpg" />
+    <Content Include="Images\Dien_vien\KungFu_panda_3\Angelina Jolie.jpg" />
+    <Content Include="Images\Dien_vien\KungFu_panda_3\Bryan Cranston.jpg" />
+    <Content Include="Images\Dien_vien\KungFu_panda_3\J.K. Simmons.jpg" />
+    <Content Include="Images\Dien_vien\KungFu_panda_3\Jack Black.jpg" />
+    <Content Include="Images\Dien_vien\KungFu_panda_3\James Hong.jpg" />
+    <Content Include="Images\Dien_vien\KungFu_panda_3\Kate Hudson.jpg" />
+    <Content Include="Images\Dien_vien\KungFu_panda_3\Seth Rogen.jpg" />
+    <Content Include="Images\Dien_vien\KungFu_panda_3\Thành Long.jpg" />
+    <Content Include="Images\eye.png" />
+    <Content Include="Images\facebook_icon.png" />
+    <Content Include="Images\google_icon.png" />
+    <Content Include="Images\heart.png" />
+    <Content Include="Images\introduce_icon.png" />
+    <Content Include="Images\Khoahocvientuong\Black_Adam.jpg" />
+    <Content Include="Images\Khoahocvientuong\Cuoc_chien_da_vu_tru.jpg" />
+    <Content Include="Images\Khoahocvientuong\Dune_hanh_tinh_cat.jpg" />
+    <Content Include="Images\Khoahocvientuong\Godzilla king of the monsters.jpg" />
+    <Content Include="Images\Khoahocvientuong\Godzilla_vs_Kong.jpg" />
+    <Content Include="Images\Khoahocvientuong\Interstellar.jpg" />
+    <Content Include="Images\Khoahocvientuong\Parcific_rim_1.jpg" />
+    <Content Include="Images\Khoahocvientuong\Start War 7.jpg" />
+    <Content Include="Images\Khoahocvientuong\The_gioi_khung_long_5.jpg" />
+    <Content Include="Images\Khoahocvientuong\The_tomorro_war.jpg" />
+    <Content Include="Images\like.png" />
+    <Content Include="Images\location_pin_icon.png" />
+    <Content Include="Images\logo.jpg" />
+    <Content Include="Images\logo1.jpg" />
+    <Content Include="Images\logo2.jpg" />
+    <Content Include="Images\Moiphathanh\Ant_man_3.jpg" />
+    <Content Include="Images\Moiphathanh\Avatar_2.jpg" />
+    <Content Include="Images\Moiphathanh\Bay_vao_tu_dia.jpg" />
+    <Content Include="Images\Moiphathanh\Dem_hung_tan.jpg" />
+    <Content Include="Images\Moiphathanh\M3GAN.jpg" />
+    <Content Include="Images\Moiphathanh\Mat_tich.jpg" />
+    <Content Include="Images\Moiphathanh\Meo_di_hia_dieu_uoc_cuoi_cung.png" />
+    <Content Include="Images\Moiphathanh\Sat_thu_doi_dau.jpg" />
+    <Content Include="Images\nen_dang_nhap.jpg" />
+    <Content Include="Images\NganHangIcon\Momo.png" />
+    <Content Include="Images\NganHangIcon\SHoppeepay.png" />
+    <Content Include="Images\NganHangIcon\TheATM.png" />
+    <Content Include="Images\NganHangIcon\ViettelPay.png" />
+    <Content Include="Images\NganHangIcon\VNPAY-QR.png" />
+    <Content Include="Images\NganHangIcon\VPNT Pay.png" />
+    <Content Include="Images\NganHangIcon\ZaloPay.png" />
+    <Content Include="Images\notification_icon.png" />
+    <Content Include="Images\Phimbo\Alice In Borderland.jpg" />
+    <Content Include="Images\Phimbo\All of us are dead.jpg" />
+    <Content Include="Images\Phimbo\Arcane.jpg" />
+    <Content Include="Images\Phimbo\Attack on Titan.jpg" />
+    <Content Include="Images\Phimbo\Bóng ma anh quốc.jpg" />
+    <Content Include="Images\Phimbo\Cuộc chiến thượng lưu.jpg" />
+    <Content Include="Images\Phimbo\Deathnote.jpg" />
+    <Content Include="Images\Phimbo\Fullmetal Alchemist.jpg" />
+    <Content Include="Images\Phimbo\Game_of_throne.jpg" />
+    <Content Include="Images\Phimbo\Gotham.jpg" />
+    <Content Include="Images\Phimbo\House_of_the_dragon.jpg" />
+    <Content Include="Images\Phimbo\loki.jpg" />
+    <Content Include="Images\Phimbo\Lookism.jpg" />
+    <Content Include="Images\Phimbo\Lucifer.jpg" />
+    <Content Include="Images\Phimbo\MH370.jpg" />
+    <Content Include="Images\Phimbo\Moon_knight.jpg" />
+    <Content Include="Images\Phimbo\Ms.Marvel.jpg" />
+    <Content Include="Images\Phimbo\record of ragnakrok.jpg" />
+    <Content Include="Images\Phimbo\shadow and bone.jpg" />
+    <Content Include="Images\Phimbo\Shringking.jpg" />
+    <Content Include="Images\Phimbo\Squid game.jpg" />
+    <Content Include="Images\Phimbo\Stranger things.jpg" />
+    <Content Include="Images\Phimbo\supergirl.jpg" />
+    <Content Include="Images\Phimbo\swarm.jpg" />
+    <Content Include="Images\Phimbo\Ted Lasso.jpg" />
+    <Content Include="Images\Phimbo\The flash.jpg" />
+    <Content Include="Images\Phimbo\The glory.jpg" />
+    <Content Include="Images\Phimbo\The lord of the rings the rings of power.jpg" />
+    <Content Include="Images\Phimbo\The mandalorian.jpg" />
+    <Content Include="Images\Phimbo\The night agent.jpg" />
+    <Content Include="Images\Phimbo\The queen%27s gambit.jpg" />
+    <Content Include="Images\Phimbo\the-last-of-us.jpg" />
+    <Content Include="Images\Phimbo\The_boy.jpg" />
+    <Content Include="Images\Phimbo\Wednesday.jpg" />
+    <Content Include="Images\Phimbo\Yellowstone.jpg" />
+    <Content Include="Images\Phimbo\You.jpg" />
+    <Content Include="Images\Phimchieurap\2012.jpg" />
+    <Content Include="Images\Phimchieurap\Alita.jpg" />
+    <Content Include="Images\Phimchieurap\Avatar 1.jpg" />
+    <Content Include="Images\Phimchieurap\Công viên kỷ jura 1.jpg" />
+    <Content Include="Images\Phimchieurap\Công viên kỷ jura 4.jpg" />
+    <Content Include="Images\Phimchieurap\Công viên kỷ jura 5.jpg" />
+    <Content Include="Images\Phimchieurap\Dragon Ball broly.jpg" />
+    <Content Include="Images\Phimchieurap\Dragon Ball supper super heros.jpg" />
+    <Content Include="Images\Phimchieurap\Godzilla.jpg" />
+    <Content Include="Images\Phimchieurap\Gấu đỏ biến hình.jpg" />
+    <Content Include="Images\Phimchieurap\Harry potter và hội phượng hoàng.jpg" />
+    <Content Include="Images\Phimchieurap\Harry Pottter 1.jpg" />
+    <Content Include="Images\Phimchieurap\Parcific rim  uprising.jpg" />
+    <Content Include="Images\Phimchieurap\Pokemon detective pikachu.jpg" />
+    <Content Include="Images\Phimchieurap\Ready Player One.jpg" />
+    <Content Include="Images\Phimchieurap\San Andreas.jpg" />
+    <Content Include="Images\Phimchieurap\Shang_Chi.jpg" />
+    <Content Include="Images\Phimchieurap\SIêu thứ cuồn nộ.jpg" />
+    <Content Include="Images\Phimchieurap\Sonic 2.jpg" />
+    <Content Include="Images\Phimchieurap\Spideruman no way home.jpg" />
+    <Content Include="Images\Phimchieurap\Thor love and thunder.jpg" />
+    <Content Include="Images\Phimchieurap\Titanic.jpg" />
+    <Content Include="Images\Phimchieurap\Troll.jpg" />
+    <Content Include="Images\Phimchieurap\X-men_The day of future past.jpg" />
+    <Content Include="Images\Phimchieurap\Zootopia.jpg" />
+    <Content Include="Images\Phimhanhdong\007 casino royale.jpg" />
+    <Content Include="Images\Phimhanhdong\007 Quantum of solace.jpg" />
+    <Content Include="Images\Phimhanhdong\007 skyfall.jpg" />
+    <Content Include="Images\Phimhanhdong\007 spectre.jpg" />
+    <Content Include="Images\Phimhanhdong\1917.jpg" />
+    <Content Include="Images\Phimhanhdong\Aquaman và vương quốc đã mất.jpg" />
+    <Content Include="Images\Phimhanhdong\Avenger_end_game.jpg" />
+    <Content Include="Images\Phimhanhdong\Avenger_infinity_war.jpg" />
+    <Content Include="Images\Phimhanhdong\Batman1.jpg" />
+    <Content Include="Images\Phimhanhdong\batman2.jpg" />
+    <Content Include="Images\Phimhanhdong\batman3.jpg" />
+    <Content Include="Images\Phimhanhdong\battleship.jpg" />
+    <Content Include="Images\Phimhanhdong\black panther 1.jpg" />
+    <Content Include="Images\Phimhanhdong\black panther 2.jpg" />
+    <Content Include="Images\Phimhanhdong\Captain Ameriac Civil war.jpg" />
+    <Content Include="Images\Phimhanhdong\Captain Ameriac The first avenger.jpg" />
+    <Content Include="Images\Phimhanhdong\Captain Ameriac winter soilder.jpg" />
+    <Content Include="Images\Phimhanhdong\Cuop_bien_vung_caribe_1.jpg" />
+    <Content Include="Images\Phimhanhdong\Fast_and_furious_10jpg.jpg" />
+    <Content Include="Images\Phimhanhdong\Fast_and_furious_5jpg.jpg" />
+    <Content Include="Images\Phimhanhdong\Fast_and_furious_6jpg.jpg" />
+    <Content Include="Images\Phimhanhdong\Fast_and_furious_7jpg.jpg" />
+    <Content Include="Images\Phimhanhdong\Fast_and_furious_8jpg.jpg" />
+    <Content Include="Images\Phimhanhdong\Fast_and_furious_9jpg.jpg" />
+    <Content Include="Images\Phimhanhdong\Fast_and_furious_hob_and_shaw.jpg" />
+    <Content Include="Images\Phimhanhdong\Gã điên báo thù.jpg" />
+    <Content Include="Images\Phimhanhdong\Góa phụ đen.jpg" />
+    <Content Include="Images\Phimhanhdong\Inception.jpg" />
+    <Content Include="Images\Phimhanhdong\Indiana Jones và dòng quay định mệnh.jpg" />
+    <Content Include="Images\Phimhanhdong\Iron man 1.jpg" />
+    <Content Include="Images\Phimhanhdong\John_wick_chapter_1.jpg" />
+    <Content Include="Images\Phimhanhdong\John_wick_chapter_2.jpg" />
+    <Content Include="Images\Phimhanhdong\John_wick_chapter_3.jpg" />
+    <Content Include="Images\Phimhanhdong\John_wick_chapter_4.jpg" />
+    <Content Include="Images\Phimhanhdong\Kingsman_khoi_nguon.jpg" />
+    <Content Include="Images\Phimhanhdong\Lien_minh_cong_ly.jpg" />
+    <Content Include="Images\Phimhanhdong\logan.jpg" />
+    <Content Include="Images\Phimhanhdong\London thất thủ.jpg" />
+    <Content Include="Images\Phimhanhdong\Mad Max.jpg" />
+    <Content Include="Images\Phimhanhdong\Ma_tran_1.jpg" />
+    <Content Include="Images\Phimhanhdong\Mission Imposible 1.jpg" />
+    <Content Include="Images\Phimhanhdong\Mission Imposible 2.jpg" />
+    <Content Include="Images\Phimhanhdong\Mission Imposible 3.jpg" />
+    <Content Include="Images\Phimhanhdong\Mission Imposible 4.jpg" />
+    <Content Include="Images\Phimhanhdong\mật vụ giải cứu.jpg" />
+    <Content Include="Images\Phimhanhdong\NGuoi_ve_tu_coi_chet.jpg" />
+    <Content Include="Images\Phimhanhdong\Nhiem_vu_bat_kha_khi_quoc_gia_bi_an.jpg" />
+    <Content Include="Images\Phimhanhdong\Nhiệm vụ giải cứu.jpg" />
+    <Content Include="Images\Phimhanhdong\Nhà trắng thất thủ 1.jpg" />
+    <Content Include="Images\Phimhanhdong\Nhà trắng thất thủ 3.jpg" />
+    <Content Include="Images\Phimhanhdong\NO_time_to_die.jpg" />
+    <Content Include="Images\Phimhanhdong\nvbkt_7.jpg" />
+    <Content Include="Images\Phimhanhdong\Phi vụ toàn sao.jpg" />
+    <Content Include="Images\Phimhanhdong\Phi_cong_sieu_dang_2.jpg" />
+    <Content Include="Images\Phimhanhdong\rush_hour 1.jpg" />
+    <Content Include="Images\Phimhanhdong\rush_hour 2.jpg" />
+    <Content Include="Images\Phimhanhdong\rush_hour 3.jpg" />
+    <Content Include="Images\Phimhanhdong\Shazam Fury of the god.jpg" />
+    <Content Include="Images\Phimhanhdong\Spiderman across the spider verse.jpg" />
+    <Content Include="Images\Phimhanhdong\Tenet.jpg" />
+    <Content Include="Images\Phimhanhdong\The hunger game the ballad of songbirdss and snake.jpg" />
+    <Content Include="Images\Phimhanhdong\The_lord_of_the_ring_1.jpg" />
+    <Content Include="Images\Phimhanhdong\The_lord_of_the_ring_2.jpg" />
+    <Content Include="Images\Phimhanhdong\The_lord_of_the_ring_3.jpg" />
+    <Content Include="Images\Phimhanhdong\Tranformer Rise of the beasts.jpg" />
+    <Content Include="Images\Phimhanhdong\Tranformers bumblebee.jpg" />
+    <Content Include="Images\Phimhanhdong\Transformers 1.jpg" />
+    <Content Include="Images\Phimhanhdong\Transformers 2.jpg" />
+    <Content Include="Images\Phimhanhdong\Transformers 3.jpg" />
+    <Content Include="Images\Phimhanhdong\Transformers 4.jpg" />
+    <Content Include="Images\Phimhanhdong\Transformers 5.jpg" />
+    <Content Include="Images\Phimhanhdong\Vệ binh dải ngân hà 3.jpg" />
+    <Content Include="Images\Phimhanhdong\Vụ cướp trong tâm bão.jpg" />
+    <Content Include="Images\Phimhanhdong\white house down.jpg" />
+    <Content Include="Images\Phimhanhdong\Điệp viên không không thấy 1.jpg" />
+    <Content Include="Images\Phimhanhdong\Điệp viên không không thấy 2.jpg" />
+    <Content Include="Images\Phimhanhdong\Điệp viên không không thấy 3.jpg" />
+    <Content Include="Images\Phimhoathinh\14-11-07_-_big_hero_6_biet_doi_big_hero_6_v5-01_1_.jpg" />
+    <Content Include="Images\Phimhoathinh\Frozen 1.jpg" />
+    <Content Include="Images\Phimhoathinh\Frozen 2.jpg" />
+    <Content Include="Images\Phimhoathinh\how_to_train_your_dragon.jpg" />
+    <Content Include="Images\Phimhoathinh\how_to_train_your_dragon_2.jpg" />
+    <Content Include="Images\Phimhoathinh\how_to_train_your_dragon_3.jpg" />
+    <Content Include="Images\Phimhoathinh\Kunfu_panda_1.jpg" />
+    <Content Include="Images\Phimhoathinh\Kunfu_panda_2.jpg" />
+    <Content Include="Images\Phimhoathinh\Kung_fu_panda_3.jpg" />
+    <Content Include="Images\Phimhoathinh\minions_gru.jpg" />
+    <Content Include="Images\Phimhoathinh\pinochio.jpg" />
+    <Content Include="Images\Phimhoathinh\soul_cuoc_song_nhiem_mau.jpg" />
+    <Content Include="Images\Phimhoathinh\spidernan_intospideruVerse.jpg" />
+    <Content Include="Images\Phimhoathinh\The lego movie 1.jpg" />
+    <Content Include="Images\Phimhoathinh\The lego movie 2.jpg" />
+    <Content Include="Images\Phimhoathinh\Zootopia.jpg" />
+    <Content Include="Images\play-button-arrowhead.png" />
+    <Content Include="Images\play-button.png" />
+    <Content Include="Images\Poster_phim\all quiet on the western front.jpg" />
+    <Content Include="Images\Poster_phim\banner_quang_cao_avatar_2.jpeg" />
+    <Content Include="Images\Poster_phim\banner_quang_cao_suzune.jpg" />
+    <Content Include="Images\Poster_phim\banner_quang_cao_the_glory.jpg" />
+    <Content Include="Images\Poster_phim\cuoc-chien-da-vu-tru.JPG" />
+    <Content Include="Images\Poster_phim\JujutsuKaisenMovie0.jpg" />
+    <Content Include="Images\Poster_phim\kungfu_panda_3.jpg" />
+    <Content Include="Images\Poster_phim\phim-nguoi-kien-va-chien-binh-ong-the-gioi-luong-tu.jpg" />
+    <Content Include="Images\Poster_phim\the-last-of-us.png" />
+    <Content Include="Images\ranking.png" />
+    <Content Include="Images\search-background.jpg" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\Search_icon.png" />
+    <Content Include="Images\security_icon.png" />
+    <Content Include="Images\share.png" />
+    <Content Include="Images\star.png" />
+    <Content Include="Images\support_email_icon.png" />
+    <Content Include="Images\Tranformers riseofthebeast\Anthony Ramos.jpg" />
+    <Content Include="Images\Tranformers riseofthebeast\Dominique Fishback.jpg" />
+    <Content Include="Images\Tranformers riseofthebeast\Dương Tử Quỳnh.jpg" />
+    <Content Include="Images\Tranformers riseofthebeast\Liza Koshy.jpg" />
+    <Content Include="Images\Tranformers riseofthebeast\Pete Davidson.jpg" />
+    <Content Include="Images\Tranformers riseofthebeast\Peter Cullen.jpg" />
+    <Content Include="Images\Tranformers riseofthebeast\Ron Perlman.jpg" />
+    <Content Include="Images\Tranformers riseofthebeast\Tobe Nwigwe.jpg" />
+    <Content Include="Images\twitter_icon.png" />
+    <Content Include="Images\Wallet_icon.png" />
+    <Content Include="Images\wallpaper-gif-4.gif" />
+    <Content Include="Images\youtube_icon.png" />
+    <Content Include="Models\Movie.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Movie.Context.cs</LastGenOutput>
+      <DependentUpon>Movie.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Movie.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Movie.edmx</DependentUpon>
+      <LastGenOutput>Movie.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\Movie.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Movie.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Movie.edmx.diagram">
+      <DependentUpon>Movie.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QLMovie\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QLMovie\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QLMovie\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QLMovie\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QLMovie\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\BinhLuan\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BinhLuan\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\DangNhap.cshtml" />
+    <Content Include="Areas\Admin\Views\TheLoaiPhim\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\ChildMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\ChildMenu1.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TheLoai\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CNPM\ThongKeVaBaoCao.cshtml" />
+    <Content Include="Areas\Admin\Views\CNPM\QLGoiDichVu.cshtml" />
+    <Content Include="Areas\Admin\Views\CNPM\QLThanhToanVaHoaDon.cshtml" />
+    <Content Include="Areas\Admin\Views\CNPM\QLTaiKhoanNV.cshtml" />
+    <Content Include="Areas\Admin\Views\CNPM\QLQuangCao.cshtml" />
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\slick slider.js" />
+    <Content Include="Scripts\sortlink.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\LikeMovie\Index.cshtml" />
+    <Content Include="Views\LikeMovie\_PartialNav.cshtml" />
+    <Content Include="Views\LikeMovie\_PartialFooter.cshtml" />
+    <Content Include="Views\LikeMovie\DangNhap.cshtml" />
+    <Content Include="Views\LikeMovie\DangKy.cshtml" />
+    <Content Include="Views\Phim\_PartialMoiPhatHanh.cshtml" />
+    <Content Include="Views\Phim\_PartialHanhDong.cshtml" />
+    <Content Include="Views\Phim\ChiTietPhim.cshtml" />
+    <Content Include="Views\Phim\_PartialKhoaHocVienTuong.cshtml" />
+    <Content Include="Views\Phim\_PartialTopSeries.cshtml" />
+    <Content Include="Views\Phim\_PartialHoatHinh.cshtml" />
+    <Content Include="Views\Phim\_PartialAnime.cshtml" />
+    <Content Include="Views\Phim\_RelatedMoviesPartial.cshtml" />
+    <Content Include="Views\Phim\_CommentSection.cshtml" />
+    <Content Include="Views\MuaVip\MuaVip.cshtml" />
+    <Content Include="Views\DanhMucPhim\PhimBo.cshtml" />
+    <Content Include="Views\DanhMucPhim\PhimChieuRap.cshtml" />
+    <Content Include="Views\DanhMucPhim\PhimTheoNam.cshtml" />
+    <Content Include="Views\DanhMucPhim\PhimTheoTheLoai.cshtml" />
+    <Content Include="Views\DanhMucPhim\_PartialBXH.cshtml" />
+    <Content Include="Views\DanhMucPhim\_PartialNoiBat.cshtml" />
+    <Content Include="Views\DanhMucPhim\_PartialSapRaMat.cshtml" />
+    <Content Include="Views\MuaVip\ThanhToan.cshtml" />
+    <Content Include="Views\Phim\_CommentList.cshtml" />
+    <Content Include="Views\User\ThayDoiMatKhau.cshtml" />
+    <Content Include="Views\User\ChinhSuaAnhDaiDien.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\SearchMovie\Search.cshtml" />
+    <Content Include="Views\Phim\XemPhim.cshtml" />
+    <Content Include="Views\MuaVip\PaymentConfirm.cshtml" />
+    <Content Include="Views\LikeMovie\LoadChildMenu.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\User\GiaHanVip.cshtml" />
+    <Content Include="Views\MuaVip\Error.cshtml" />
+    <Content Include="Views\MuaVip\ReturnUrl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\BaseAdmin\" />
+    <Folder Include="bin\" />
+    <Folder Include="Uploads\" />
+    <Folder Include="Views\ThanhToan\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50362</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44310/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

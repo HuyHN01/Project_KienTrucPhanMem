@@ -1,0 +1,58 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background: #000;
+}
+h1{
+    position: relative;
+    color: white;
+    top: 100px;
+    text-align: center;
+}
+table{
+    position: relative;
+    top: 145px;
+    left: 200px;
+}
+table tr td img{
+    width: 25px;
+    height: 25px;
+}
+/* Kẻ viền cho các ô */
+
+/* dãn khoảng cách giữa các ô và các cột trong bản */
+table tr td{
+    padding-right: 100px;
+    padding-bottom: 25px;
+}
+/* định dạng chữ trong từng ô */
+table tr td{
+    font-size: 25px;
+}
+/* Căn lè cho chữ trong bản */
+table tr td.ten-dich-vu{
+    text-align: left !important;
+}
+table tr td{
+    color: white;
+    text-align: center;
+}
+table tr:first-child td.vip-name{
+    font-size: 30px;
+    font-weight: bold;
+}
+/* Định dạng cho phần nút */
+table tr:last-child td button{
+    background-color: #6c67674f;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 10px ;
+    color: white;
+}
+table tr:last-child td button:hover{
+    background-image: linear-gradient(114.88deg, #ff6500 0%, #e93013 97.15%);
+}

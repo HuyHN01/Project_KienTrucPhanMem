@@ -1,0 +1,383 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+/*Định dạng phần header*/
+header{
+    background-color: #000;
+    width: 100%;
+    border-bottom: solid 1px #e3dada3b;
+    position: fixed;
+    top: 0px;
+    z-index: 10;
+}
+
+#main-navbar_wrapper{
+    display: flex;
+}
+nav#container{
+    width: 1150px;
+    padding: 0 80px;
+}
+#main-menu{
+    box-sizing: border-box;
+    width: 600px;
+    padding: 0px 30px;
+    padding-right: 100px;
+}
+#main-menu>ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+#main-menu ul li span{
+    font-weight: 700;
+    color: #9b9b9b;
+    font-size: 16px;
+    list-style: none;    
+}
+#main-menu ul li a{
+    text-decoration: none;
+}
+/* Chỉnh kích thước icon */
+nav#container div#right-menu img{
+    width: 30px;
+    height: 30px;
+}
+/* Cho phần tìm kiếm và mua vip sát về bên phải */
+#right-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+}
+/* cho phần button mua vip */
+#right-menu button span{
+    color: white;
+    font-weight: 700;
+}
+#right-menu>button{
+    width: 115px;
+    background-image: linear-gradient(114.88deg, #ff6500 0%, #e93013 97.15%);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+}
+#right-menu a{
+    text-decoration: none;
+    color: #9b9b9b;
+    font-weight: 500;
+}
+div.notification{
+    top: 50px;
+    width: 250px;
+    height: 300px;
+    background-color: #000;
+    position: fixed;
+    z-index: 20;
+    right: 310px;
+    border: solid 1px #6c67679e;
+    /* display: none; */
+}
+/* HIệu ứng rê chuột vào */
+#main-menu>ul>li a span:hover{
+    cursor: pointer;
+    color: #ff6500;
+}
+#main-menu>ul>li:hover{
+    transform: scale(1.1);
+    position: relative;
+    z-index: 1;
+}
+#right-menu button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+#right-menu a:hover{
+    transform: scale(1.1);
+    color: #ff6500;
+    font-weight: 300;
+}
+#right-menu>img:hover{
+    transform: scale(1.1);
+}
+/* Làm nút search */
+div#search-container{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+#search-input{
+    position: absolute;
+    /* display: inline-flex; */
+    top: -3px;
+    left: -414px;
+}
+#search-input input{
+    height: 30px;
+    width: 300px;
+    border-radius: 10px;
+    border: none;
+    border-top-right-radius: 0px ;
+    border-bottom-right-radius: 0px ;
+    padding: 0 10px;
+    outline: none;
+}
+#search-input button{
+    width: 115px;
+    height: 30px;
+    border: none;
+    border-top-right-radius: 10px ;
+    border-bottom-right-radius: 10px;
+    color: white;
+    font-weight: 700;
+    background-color: #fe6347;
+}
+#search-input input::placeholder
+{
+    padding: 0 10px;
+    font-weight: 400;
+}
+
+
+/* CSS cho phần banner quảng cáo phim đầu trang */
+div.banner-quang-cao-phim{
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+div.banner-thong-tin{
+    width: 100%;
+    height: auto;
+}
+div.poster{
+    width: 1180px;
+    height: auto;
+    
+}
+div.poster>img{
+    width: 100%;
+    height: auto;
+    border-radius: 5px ;
+}
+div.poster img:first-child{
+    position: absolute;
+}
+div.poster img:last-child{
+    position: relative;
+    top: 1px;
+}
+/* Tên phim */
+div.ten-phim{
+    display: inline-block;
+    position: absolute;
+    bottom: 220px;
+    left: 50px;
+}
+div.ten-phim span{
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+/* Information  */
+div.information{
+    width: 60%;
+    height: auto;
+    display: inline-block;
+    position: absolute;
+    bottom: 175px;
+    left: 65px;
+}
+div.information ul{
+    width: 45%;
+    height: auto;
+    display: inline-flex;
+    justify-content: space-between;
+    color: #f1eaeb ;
+}
+div.information ul li span{
+    font-weight: 400;
+}
+/* Nút xem ngay */
+div.xem-ngay{
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 160px;
+    height: 45px;
+    background-image: linear-gradient(114.88deg, #ff6500 0%, #e93013 97.15%);
+}
+div.xem-ngay a{
+    text-decoration: none;
+    margin-left: 10px ;
+}
+div.xem-ngay span{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+div.xem-ngay img{
+    width: 16px;
+    height: auto;
+}
+div.xem-ngay:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    border: solid rgb(190, 185, 185) 1px;
+}
+/* Nút yêu thích hình trái tim */
+div.heart{
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #6c67674f;
+    box-sizing: border-box;
+    padding-top: 15px ;
+    position: absolute;
+    bottom: 96px;
+    left: 226px;
+}
+div.heart>img{
+    width: 70%;
+    height: 87%;
+    padding-left: 8px;
+}
+div.heart:hover{
+    background: gray;
+}
+/* CSS cho những dấu chấm */
+/* Css cho phần dấu chấm slick slider của banner khi nó được xuất hiện */
+.slick-dots{
+    display: inline-flex !important;
+    color: white;
+    list-style: none;
+    margin: 0px 50%;
+    transform: translateX(-50%);
+}
+.slick-active>button{
+    background: white !important;
+}
+.slick-dots li button{
+    background: rgba(105, 101, 101, 0.566);
+    border-radius: 50% !important;
+    height: 11px;
+    width: 11px;
+    color: transparent;
+    border: none;
+}
+.slick-dots li{
+    margin: 0px 5px;
+}
+
+/* css phần footer */
+footer{
+    border-top: solid #514b4b99 1px;
+    background-color: #000;
+    width: 100%;
+    height: auto;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items:center;
+    
+}
+/* Kích thước của những tấm ảnh icon phần footer */
+.contact>div ,.about-us>div.about>div, .icon-social>div{
+    width: 46px;
+    height: 46px;
+}
+.contact>div img, .about-us>div.about img{
+    width: 70%;
+    height:70%
+}
+/* Định dạng phần contact us */
+/* inline-flex không làm cho những flex items hiển thị inline
+mà là làm flex container hiển thị inline */
+.contact{
+    display: flex;
+    margin: 20px 0px;
+    width: auto;
+    height: auto;
+}
+.contact>div{
+    border-radius: 50%;
+    background-color: #6c67674f;
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+.contact>div:hover {
+    border: solid 1px rgb(56, 53, 53);
+    background-color: gray;
+}
+.contact p a:hover{
+    color: #ff6500 ;
+}
+.contact div, .contact p{
+    margin: 0px 10px;
+    text-align: center;
+}
+.contact p{
+    box-sizing: border-box;
+    padding-top: 13px;
+}
+.contact p a{
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+}
+/* CSS cho phần about us */
+.about {
+    display: flex;
+}
+.about p{
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+.about p a:hover{
+    border-bottom: solid 1px #514b4b99;
+    color: #ff6500;
+}
+.about p a{
+    text-decoration: none;
+    font-size: 17px;
+    color: white;
+}
+
+.icon-social{
+    display: inline-flex;
+}
+.icon-social div{
+    width: 40px;
+    height: 40px;
+    margin-right:10px;
+    background-color: #6c67674f ;
+    border-radius: 10px;
+}
+.icon-social div:hover{
+    border: solid 1px gray;
+    background-color: gray;
+}
+.icon-social div img{
+    width: 90%;
+    height: 90%;
+}
+

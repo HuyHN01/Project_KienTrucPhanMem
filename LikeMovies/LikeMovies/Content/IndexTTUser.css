@@ -1,0 +1,100 @@
+﻿body {
+    font-family: 'Times New Roman';
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #000000;
+    color: #fff;
+}
+
+.navbar {
+    margin-bottom: 20px;
+    background-color: #000000 !important;
+    border: 2px solid #808080;
+    border-radius: 0px;
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important;
+}
+
+    .navbar-brand:hover, .nav-link:hover {
+        color: #FFA500 !important;
+    }
+
+.avatar-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.greeting {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.btn-custom {
+    background-color: #FFA500;
+    color: whitesmoke;
+    border: 2px solid #856f6f;
+    border-radius: 6px;
+    margin: 10px;
+}
+
+    .btn-custom:hover {
+        background-color: #ff6a00;
+    }
+
+.user-info, .change-password-form, .otp-verification-form {
+    margin-top: 20px;
+    text-align: left;
+    background-color: #000000;
+    color: #fff;
+    padding: 15px;
+    border: 2px solid #808080;
+    border-radius: 6px;
+    width: 80%;
+    max-width: 400px;
+}
+
+.change-password-form, .otp-verification-form {
+    display: none;
+}
+
+footer {
+    background-color: #000000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-top: 2px solid #808080;
+    border-radius: 0px;
+}
+
+.avatar-selection {
+    display: none;
+    margin-top: 20px;
+    background-color: #333;
+    padding: 15px;
+    border: 2px solid #808080;
+    border-radius: 6px;
+}
+
+    .avatar-selection img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 5px;
+        cursor: pointer;
+    }

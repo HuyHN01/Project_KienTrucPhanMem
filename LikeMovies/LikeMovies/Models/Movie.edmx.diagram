@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="519f1eda188b4a089b733d744fbd781c" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="QL_MovieModel.Comments" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_MovieModel.Episodes" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_MovieModel.Favorites" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_MovieModel.Ratings" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_MovieModel.Seasons" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_MovieModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_MovieModel.Users" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_MovieModel.WatchHistory" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="QL_MovieModel.FK__Comments__UserID__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_MovieModel.FK__Episodes__Season__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_MovieModel.FK__Favorites__UserI__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_MovieModel.FK__Ratings__UserID__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_MovieModel.FK__WatchHist__UserI__47DBAE45" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QL_MovieModel.Genres" Width="1.5" PointX="0.75" PointY="11.125" />
+        <EntityTypeShape EntityType="QL_MovieModel.Movies" Width="1.5" PointX="3" PointY="9.75" />
+        <AssociationConnector Association="QL_MovieModel.FK__Comments__MovieI__3C69FB99" />
+        <AssociationConnector Association="QL_MovieModel.FK__Favorites__Movie__4BAC3F29" />
+        <AssociationConnector Association="QL_MovieModel.FK__Ratings__MovieID__412EB0B6" />
+        <AssociationConnector Association="QL_MovieModel.FK__Seasons__MovieID__4F7CD00D" />
+        <AssociationConnector Association="QL_MovieModel.FK__WatchHist__Movie__46E78A0C" />
+        <AssociationConnector Association="QL_MovieModel.MovieGenres" />
+        <EntityTypeShape EntityType="QL_MovieModel.PosterMovie" Width="1.5" PointX="5.25" PointY="20.25" />
+        <AssociationConnector Association="QL_MovieModel.FK_PosterMovie_Movies" />
+        <EntityTypeShape EntityType="QL_MovieModel.DiscountCodes" Width="1.5" PointX="12.625" PointY="7" />
+        <EntityTypeShape EntityType="QL_MovieModel.Payments" Width="1.5" PointX="12.625" PointY="2.5" />
+        <EntityTypeShape EntityType="QL_MovieModel.SubscriptionPlans" Width="1.5" PointX="10.375" PointY="2.75" />
+        <AssociationConnector Association="QL_MovieModel.FK__DiscountC__PlanI__60A75C0F" />
+        <AssociationConnector Association="QL_MovieModel.FK__Payments__PlanID__656C112C" />
+        <AssociationConnector Association="QL_MovieModel.FK__Payments__UserID__6477ECF3" />
+        <EntityTypeShape EntityType="QL_MovieModel.AdminMovie" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="QL_MovieModel.MENUs" Width="1.5" PointX="7.375" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

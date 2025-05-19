@@ -1,0 +1,116 @@
+﻿
+body {
+    font-family: 'Times New Roman';
+    background-color: #121212; /* Black background */
+    color: #ffffff; /* White text */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1e1e1e; /* Darker grey background for container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adjusted shadow for dark theme */
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+h2 {
+    text-align: center;
+    color: #ffffff; /* White text */
+}
+
+h3 {
+    color: #FFA500; /* Orange color to highlight the selected plan */
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.payment-form, .payment-info {
+    width: 48%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+input[type="number"],
+input[type="radio"],
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+    input[type="number"]:focus,
+    input[type="radio"]:focus,
+    input[type="text"]:focus {
+        outline: none;
+        border-color: #FFA500; /* Orange border on focus */
+    }
+
+button {
+    padding: 15px 20px;
+    background-color: #FFA500; /* Orange background */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    button:hover {
+        background-color: #FF8C00; /* Slightly darker orange on hover */
+    }
+
+.radio-label {
+    display: flex;
+    align-items: center;
+}
+
+    .radio-label input {
+        margin-right: 10px;
+    }
+
+    .radio-label img {
+        width: 24px; /* Adjust the size as needed */
+        height: auto;
+        margin-right: 10px;
+    }
+
+table {
+    width: 100%;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+    table td {
+        padding: 10px;
+    }
+
+        table td:first-child {
+            font-weight: bold;
+        }
+
+#thoi-gian, #tong-thanh-toan, #gia-goi {
+    font-weight: bold;
+}
+

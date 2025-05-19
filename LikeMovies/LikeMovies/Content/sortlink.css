@@ -1,0 +1,11 @@
+﻿/* Màu sắc mặc định cho tất cả các liên kết */
+.sort-link {
+    color: #000000; /* Màu đen mặc định */
+    text-decoration: none; /* Bỏ gạch chân */
+}
+
+    /* Màu sắc khi liên kết được chọn (được nhấp vào) */
+    .sort-link.selected {
+        color: #ff6550; /* Màu cam khi được chọn */
+        font-weight: bold; /* Tô đậm khi được chọn */
+    }

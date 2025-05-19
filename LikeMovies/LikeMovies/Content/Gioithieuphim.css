@@ -1,0 +1,192 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+#body>div{
+    margin: 30px 0px;
+}
+/* css cho phàn banner chứa hình ảnh và tên phim */
+#banner-phim{
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+#poster-phim{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 30px;
+}
+#poster-phim img:first-child{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+#poster-phim img:last-child {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    bottom: -5px;
+}
+#name-movie, #nut-xem-phim, #like-share{
+    position: absolute;
+    z-index: 2;
+    bottom: 70px;
+}
+#name-movie{
+    bottom: 140px;
+    left: 40px;
+}
+#name-movie span{
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+}
+#nut-xem-phim{
+    background-image: linear-gradient(114.88deg, #ff6500 0%, #e93013 97.15%);
+    width: 145px;
+    height: 46px;
+    text-align: center;
+    padding-top: 10px;
+    box-sizing: border-box;
+    left:45px;
+    border-radius: 10px;
+}
+#nut-xem-phim:hover{
+    transform: scale(1.05);
+    border: solid rgb(171, 167, 167) 1px;
+}
+#nut-xem-phim a{
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+}
+#like-share{
+    left: 205px;
+    bottom: 68px;
+}
+#like-share div{
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    background-color: #6c67674f;
+}
+#like-share div:hover{
+    background-color: gray;
+}
+#like-share>div>img{
+    width: 80%;
+    height: 80%;
+}
+/* Số tập phim */
+div.so-tap-phim{
+    box-sizing: border-box;
+    padding-left: 28px;
+    width: 100%;
+    height: auto;
+}
+div.tap{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    background-color: #151515;
+    padding: 10px 20px;
+    margin: 0px 10px;
+}
+div.tap a{
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+}
+div.tap a:hover{
+    color: #ff6500;
+}
+/* Phần mô tả phim */
+#mo-ta-phim{
+    display: inline-flex;
+    justify-content: space-around;
+}
+#mo-ta-phim div:first-child{
+    width: 49%;
+    height: 100%;
+}
+#mo-ta-phim div:last-child{
+    width: 35%;
+    height: 100%;
+}
+#mo-ta-phim div:last-child{
+    box-sizing: border-box;
+}
+#mo-ta-phim div:last-child table{
+    width: 100%;
+    height: 100%;
+}
+#mo-ta-phim p{
+    color: white;
+    font-weight: 400;
+    text-align: justify;
+}
+#mo-ta-phim div:first-child p:first-child{
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+#mo-ta-phim td{
+    color: white;
+    font-weight: 400;
+}
+/* Phần diễn viên phim */
+div#dien-vien{
+    width: 100%;
+    height: auto;
+}
+div#thong-tin-dien-vien{
+    width: 100%;
+    height: auto;
+    display: inline-flex;
+    justify-content: space-between;
+}
+div#dien-vien h3{
+    color: white;
+    font-weight: 400;
+    font-size: 30px;
+    padding-bottom: 10px ;
+}
+div#thong-tin-dien-vien>div{
+    width: 125px;
+    height: auto;
+}
+div#thong-tin-dien-vien>div>img{
+    width: 100%;
+    height: auto;
+}
+div#dien-vien span{
+    color: #fff;
+    display: block;
+    text-align: center;
+}
+div#thong-tin-dien-vien>div>span:last-child{
+    color: #6c6767;
+}
+/* Phần bình luận */
+div#comment{
+    width: 100%;
+    height: auto;
+}
+div#comment div:first-child{
+    display: inline-flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+div#comment div:first-child h3{
+    color: white;
+    font-size: 30px;
+}

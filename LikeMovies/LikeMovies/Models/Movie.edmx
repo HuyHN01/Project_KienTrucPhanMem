@@ -1,0 +1,1160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QL_MovieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminMovie">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameAd" Type="nvarchar" MaxLength="60" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="UsernameAd" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PasswordAd" Type="nvarchar(max)" />
+          <Property Name="AvartarURL" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CommentText" Type="nvarchar(max)" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="Likes" Type="int" />
+        </EntityType>
+        <EntityType Name="DiscountCodes">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlanID" Type="int" />
+          <Property Name="DiscountCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Episodes">
+          <Key>
+            <PropertyRef Name="EpisodeID" />
+          </Key>
+          <Property Name="EpisodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeasonID" Type="int" Nullable="false" />
+          <Property Name="EpisodeNumber" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="ReleaseDate" Type="date" />
+          <Property Name="VideoURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="FavoriteID" />
+          </Key>
+          <Property Name="FavoriteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MENUs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MenuLink" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="OrderNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="MovieGenres">
+          <Key>
+            <PropertyRef Name="MovieID" />
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ReleaseDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Rating" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Director" Type="nvarchar" MaxLength="100" />
+          <Property Name="Thumbnail" Type="nvarchar(max)" />
+          <Property Name="TrailerURL" Type="nvarchar(max)" />
+          <Property Name="MovieURL" Type="nvarchar(max)" />
+          <Property Name="ViewCount" Type="int" />
+          <Property Name="VIPType" Type="int" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="PlanID" Type="int" />
+          <Property Name="SubscriptionDuration" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PaymentMethod" Type="int" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="TransactionStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PosterMovie">
+          <Key>
+            <PropertyRef Name="PosterID" />
+          </Key>
+          <Property Name="PosterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" />
+          <Property Name="PosterURL" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsSlider" Type="bit" />
+          <Property Name="SliderOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Ratings">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="DateRated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Seasons">
+          <Key>
+            <PropertyRef Name="SeasonID" />
+          </Key>
+          <Property Name="SeasonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="SeasonNumber" Type="int" Nullable="false" />
+          <Property Name="ReleaseDate" Type="date" />
+          <Property Name="TotalEpisodes" Type="int" />
+        </EntityType>
+        <EntityType Name="SubscriptionPlans">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlanName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DevicesLimit" Type="int" />
+          <Property Name="AdFree" Type="bit" />
+          <Property Name="VipContentAccess" Type="bit" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="UpdatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="AvatarURL" Type="nvarchar" MaxLength="200" />
+          <Property Name="levelVIP" Type="int" />
+          <Property Name="TimeVIP" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WatchHistory">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="DateWatched" Type="datetime" />
+          <Property Name="Progress" Type="int" />
+        </EntityType>
+        <Association Name="FK__Comments__MovieI__3C69FB99">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DiscountC__PlanI__60A75C0F">
+          <End Role="SubscriptionPlans" Type="Self.SubscriptionPlans" Multiplicity="0..1" />
+          <End Role="DiscountCodes" Type="Self.DiscountCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscriptionPlans">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="DiscountCodes">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Episodes__Season__52593CB8">
+          <End Role="Seasons" Type="Self.Seasons" Multiplicity="1" />
+          <End Role="Episodes" Type="Self.Episodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seasons">
+              <PropertyRef Name="SeasonID" />
+            </Principal>
+            <Dependent Role="Episodes">
+              <PropertyRef Name="SeasonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Favorites__Movie__4BAC3F29">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Favorites__UserI__4CA06362">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MovieGenr__Genre__5629CD9C">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieGenres" Type="Self.MovieGenres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="MovieGenres">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__PlanID__656C112C">
+          <End Role="SubscriptionPlans" Type="Self.SubscriptionPlans" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscriptionPlans">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__UserID__6477ECF3">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ratings__MovieID__412EB0B6">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Seasons__MovieID__4F7CD00D">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Seasons" Type="Self.Seasons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Seasons">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WatchHist__Movie__46E78A0C">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="WatchHistory" Type="Self.WatchHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="WatchHistory">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WatchHist__UserI__47DBAE45">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="WatchHistory" Type="Self.WatchHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WatchHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieGenres_Movies">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="MovieGenres" Type="Self.MovieGenres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="MovieGenres">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosterMovie_Movies">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="0..1" />
+          <End Role="PosterMovie" Type="Self.PosterMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="PosterMovie">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QL_MovieModelStoreContainer">
+          <EntitySet Name="AdminMovie" EntityType="Self.AdminMovie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiscountCodes" EntityType="Self.DiscountCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Episodes" EntityType="Self.Episodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favorites" EntityType="Self.Favorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENUs" EntityType="Self.MENUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieGenres" EntityType="Self.MovieGenres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosterMovie" EntityType="Self.PosterMovie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seasons" EntityType="Self.Seasons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubscriptionPlans" EntityType="Self.SubscriptionPlans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WatchHistory" EntityType="Self.WatchHistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Comments__MovieI__3C69FB99" Association="Self.FK__Comments__MovieI__3C69FB99">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DiscountC__PlanI__60A75C0F" Association="Self.FK__DiscountC__PlanI__60A75C0F">
+            <End Role="SubscriptionPlans" EntitySet="SubscriptionPlans" />
+            <End Role="DiscountCodes" EntitySet="DiscountCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Episodes__Season__52593CB8" Association="Self.FK__Episodes__Season__52593CB8">
+            <End Role="Seasons" EntitySet="Seasons" />
+            <End Role="Episodes" EntitySet="Episodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Favorites__Movie__4BAC3F29" Association="Self.FK__Favorites__Movie__4BAC3F29">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Favorites__UserI__4CA06362" Association="Self.FK__Favorites__UserI__4CA06362">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MovieGenr__Genre__5629CD9C" Association="Self.FK__MovieGenr__Genre__5629CD9C">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="MovieGenres" EntitySet="MovieGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__PlanID__656C112C" Association="Self.FK__Payments__PlanID__656C112C">
+            <End Role="SubscriptionPlans" EntitySet="SubscriptionPlans" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__UserID__6477ECF3" Association="Self.FK__Payments__UserID__6477ECF3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ratings__MovieID__412EB0B6" Association="Self.FK__Ratings__MovieID__412EB0B6">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Seasons__MovieID__4F7CD00D" Association="Self.FK__Seasons__MovieID__4F7CD00D">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Seasons" EntitySet="Seasons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WatchHist__Movie__46E78A0C" Association="Self.FK__WatchHist__Movie__46E78A0C">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="WatchHistory" EntitySet="WatchHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WatchHist__UserI__47DBAE45" Association="Self.FK__WatchHist__UserI__47DBAE45">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="WatchHistory" EntitySet="WatchHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieGenres_Movies" Association="Self.FK_MovieGenres_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="MovieGenres" EntitySet="MovieGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosterMovie_Movies" Association="Self.FK_PosterMovie_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="PosterMovie" EntitySet="PosterMovie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QL_MovieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CommentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Comments__UserID__3D5E1FD2" FromRole="Comments" ToRole="Users" />
+          <NavigationProperty Name="Movies" Relationship="QL_MovieModel.FK__Comments__MovieI__3C69FB99" FromRole="Comments" ToRole="Movies" />
+          <Property Name="Likes" Type="Int32" />
+          <Property Name="Rating" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Episodes">
+          <Key>
+            <PropertyRef Name="EpisodeID" />
+          </Key>
+          <Property Name="EpisodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeasonID" Type="Int32" Nullable="false" />
+          <Property Name="EpisodeNumber" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
+          <Property Name="VideoURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Seasons" Relationship="Self.FK__Episodes__Season__52593CB8" FromRole="Episodes" ToRole="Seasons" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="FavoriteID" />
+          </Key>
+          <Property Name="FavoriteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Favorites__UserI__4CA06362" FromRole="Favorites" ToRole="Users" />
+          <NavigationProperty Name="Movies" Relationship="QL_MovieModel.FK__Favorites__Movie__4BAC3F29" FromRole="Favorites" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Ratings">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="DateRated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Ratings__UserID__4222D4EF" FromRole="Ratings" ToRole="Users" />
+          <NavigationProperty Name="Movies" Relationship="QL_MovieModel.FK__Ratings__MovieID__412EB0B6" FromRole="Ratings" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Seasons">
+          <Key>
+            <PropertyRef Name="SeasonID" />
+          </Key>
+          <Property Name="SeasonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="SeasonNumber" Type="Int32" Nullable="false" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
+          <Property Name="TotalEpisodes" Type="Int32" />
+          <NavigationProperty Name="Episodes" Relationship="Self.FK__Episodes__Season__52593CB8" FromRole="Seasons" ToRole="Episodes" />
+          <NavigationProperty Name="Movies" Relationship="QL_MovieModel.FK__Seasons__MovieID__4F7CD00D" FromRole="Seasons" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__UserID__3D5E1FD2" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="Favorites" Relationship="Self.FK__Favorites__UserI__4CA06362" FromRole="Users" ToRole="Favorites" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK__Ratings__UserID__4222D4EF" FromRole="Users" ToRole="Ratings" />
+          <NavigationProperty Name="WatchHistory" Relationship="Self.FK__WatchHist__UserI__47DBAE45" FromRole="Users" ToRole="WatchHistory" />
+          <Property Name="AvatarURL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payments" Relationship="QL_MovieModel.FK__Payments__UserID__6477ECF3" FromRole="Users" ToRole="Payments" />
+          <Property Name="levelVIP" Type="Int32" />
+          <Property Name="TimeVIP" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="WatchHistory">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DateWatched" Type="DateTime" Precision="3" />
+          <Property Name="Progress" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__WatchHist__UserI__47DBAE45" FromRole="WatchHistory" ToRole="Users" />
+          <NavigationProperty Name="Movies" Relationship="QL_MovieModel.FK__WatchHist__Movie__46E78A0C" FromRole="WatchHistory" ToRole="Movies" />
+        </EntityType>
+        <Association Name="FK__Comments__UserID__3D5E1FD2">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Episodes__Season__52593CB8">
+          <End Role="Seasons" Type="Self.Seasons" Multiplicity="1" />
+          <End Role="Episodes" Type="Self.Episodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seasons">
+              <PropertyRef Name="SeasonID" />
+            </Principal>
+            <Dependent Role="Episodes">
+              <PropertyRef Name="SeasonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Favorites__UserI__4CA06362">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ratings__UserID__4222D4EF">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WatchHist__UserI__47DBAE45">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="WatchHistory" Type="Self.WatchHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WatchHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovieEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comments" />
+          <EntitySet Name="Episodes" EntityType="Self.Episodes" />
+          <EntitySet Name="Favorites" EntityType="Self.Favorites" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" />
+          <EntitySet Name="Seasons" EntityType="Self.Seasons" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="WatchHistory" EntityType="Self.WatchHistory" />
+          <AssociationSet Name="FK__Comments__UserID__3D5E1FD2" Association="Self.FK__Comments__UserID__3D5E1FD2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Episodes__Season__52593CB8" Association="Self.FK__Episodes__Season__52593CB8">
+            <End Role="Seasons" EntitySet="Seasons" />
+            <End Role="Episodes" EntitySet="Episodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Favorites__UserI__4CA06362" Association="Self.FK__Favorites__UserI__4CA06362">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ratings__UserID__4222D4EF" Association="Self.FK__Ratings__UserID__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WatchHist__UserI__47DBAE45" Association="Self.FK__WatchHist__UserI__47DBAE45">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="WatchHistory" EntitySet="WatchHistory" />
+          </AssociationSet>
+          <EntitySet Name="Genres" EntityType="QL_MovieModel.Genres" />
+          <EntitySet Name="Movies" EntityType="QL_MovieModel.Movies" />
+          <AssociationSet Name="FK__Comments__MovieI__3C69FB99" Association="QL_MovieModel.FK__Comments__MovieI__3C69FB99">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Favorites__Movie__4BAC3F29" Association="QL_MovieModel.FK__Favorites__Movie__4BAC3F29">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ratings__MovieID__412EB0B6" Association="QL_MovieModel.FK__Ratings__MovieID__412EB0B6">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Seasons__MovieID__4F7CD00D" Association="QL_MovieModel.FK__Seasons__MovieID__4F7CD00D">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Seasons" EntitySet="Seasons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WatchHist__Movie__46E78A0C" Association="QL_MovieModel.FK__WatchHist__Movie__46E78A0C">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="WatchHistory" EntitySet="WatchHistory" />
+          </AssociationSet>
+          <AssociationSet Name="MovieGenres" Association="QL_MovieModel.MovieGenres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <EntitySet Name="PosterMovie" EntityType="QL_MovieModel.PosterMovie" />
+          <AssociationSet Name="FK_PosterMovie_Movies" Association="QL_MovieModel.FK_PosterMovie_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="PosterMovie" EntitySet="PosterMovie" />
+          </AssociationSet>
+          <EntitySet Name="DiscountCodes" EntityType="QL_MovieModel.DiscountCodes" />
+          <EntitySet Name="Payments" EntityType="QL_MovieModel.Payments" />
+          <EntitySet Name="SubscriptionPlans" EntityType="QL_MovieModel.SubscriptionPlans" />
+          <AssociationSet Name="FK__DiscountC__PlanI__60A75C0F" Association="QL_MovieModel.FK__DiscountC__PlanI__60A75C0F">
+            <End Role="SubscriptionPlans" EntitySet="SubscriptionPlans" />
+            <End Role="DiscountCodes" EntitySet="DiscountCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__PlanID__656C112C" Association="QL_MovieModel.FK__Payments__PlanID__656C112C">
+            <End Role="SubscriptionPlans" EntitySet="SubscriptionPlans" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__UserID__6477ECF3" Association="QL_MovieModel.FK__Payments__UserID__6477ECF3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <EntitySet Name="AdminMovie" EntityType="QL_MovieModel.AdminMovie" />
+          <EntitySet Name="MENUs" EntityType="QL_MovieModel.MENUs" />
+        </EntityContainer>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movies" Relationship="QL_MovieModel.MovieGenres" FromRole="Genres" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Rating" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Director" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrailerURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MovieURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ViewCount" Type="Int32" />
+          <NavigationProperty Name="Comments" Relationship="QL_MovieModel.FK__Comments__MovieI__3C69FB99" FromRole="Movies" ToRole="Comments" />
+          <NavigationProperty Name="Favorites" Relationship="QL_MovieModel.FK__Favorites__Movie__4BAC3F29" FromRole="Movies" ToRole="Favorites" />
+          <NavigationProperty Name="Ratings" Relationship="QL_MovieModel.FK__Ratings__MovieID__412EB0B6" FromRole="Movies" ToRole="Ratings" />
+          <NavigationProperty Name="Seasons" Relationship="QL_MovieModel.FK__Seasons__MovieID__4F7CD00D" FromRole="Movies" ToRole="Seasons" />
+          <NavigationProperty Name="WatchHistory" Relationship="QL_MovieModel.FK__WatchHist__Movie__46E78A0C" FromRole="Movies" ToRole="WatchHistory" />
+          <NavigationProperty Name="Genres" Relationship="QL_MovieModel.MovieGenres" FromRole="Movies" ToRole="Genres" />
+          <NavigationProperty Name="PosterMovie" Relationship="QL_MovieModel.FK_PosterMovie_Movies" FromRole="Movies" ToRole="PosterMovie" />
+          <Property Name="VIPType" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__Comments__MovieI__3C69FB99">
+          <End Type="QL_MovieModel.Movies" Role="Movies" Multiplicity="1" />
+          <End Type="QL_MovieModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Favorites__Movie__4BAC3F29">
+          <End Type="QL_MovieModel.Movies" Role="Movies" Multiplicity="1" />
+          <End Type="QL_MovieModel.Favorites" Role="Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ratings__MovieID__412EB0B6">
+          <End Type="QL_MovieModel.Movies" Role="Movies" Multiplicity="1" />
+          <End Type="QL_MovieModel.Ratings" Role="Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Seasons__MovieID__4F7CD00D">
+          <End Type="QL_MovieModel.Movies" Role="Movies" Multiplicity="1" />
+          <End Type="QL_MovieModel.Seasons" Role="Seasons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Seasons">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WatchHist__Movie__46E78A0C">
+          <End Type="QL_MovieModel.Movies" Role="Movies" Multiplicity="1" />
+          <End Type="QL_MovieModel.WatchHistory" Role="WatchHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="WatchHistory">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MovieGenres">
+          <End Type="QL_MovieModel.Genres" Role="Genres" Multiplicity="*" />
+          <End Type="QL_MovieModel.Movies" Role="Movies" Multiplicity="*" />
+        </Association>
+        <EntityType Name="PosterMovie">
+          <Key>
+            <PropertyRef Name="PosterID" />
+          </Key>
+          <Property Name="PosterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" />
+          <Property Name="PosterURL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movies" Relationship="QL_MovieModel.FK_PosterMovie_Movies" FromRole="PosterMovie" ToRole="Movies" />
+          <Property Name="IsSlider" Type="Boolean" />
+          <Property Name="SliderOrder" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_PosterMovie_Movies">
+          <End Type="QL_MovieModel.Movies" Role="Movies" Multiplicity="0..1" />
+          <End Type="QL_MovieModel.PosterMovie" Role="PosterMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="PosterMovie">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DiscountCodes">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlanID" Type="Int32" />
+          <Property Name="DiscountCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="SubscriptionPlans" Relationship="QL_MovieModel.FK__DiscountC__PlanI__60A75C0F" FromRole="DiscountCodes" ToRole="SubscriptionPlans" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="PlanID" Type="Int32" />
+          <Property Name="SubscriptionDuration" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="PaymentMethod" Type="Int32" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="TransactionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SubscriptionPlans" Relationship="QL_MovieModel.FK__Payments__PlanID__656C112C" FromRole="Payments" ToRole="SubscriptionPlans" />
+          <NavigationProperty Name="Users" Relationship="QL_MovieModel.FK__Payments__UserID__6477ECF3" FromRole="Payments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="SubscriptionPlans">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlanName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="DevicesLimit" Type="Int32" />
+          <Property Name="AdFree" Type="Boolean" />
+          <Property Name="VipContentAccess" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DiscountCodes" Relationship="QL_MovieModel.FK__DiscountC__PlanI__60A75C0F" FromRole="SubscriptionPlans" ToRole="DiscountCodes" />
+          <NavigationProperty Name="Payments" Relationship="QL_MovieModel.FK__Payments__PlanID__656C112C" FromRole="SubscriptionPlans" ToRole="Payments" />
+        </EntityType>
+        <Association Name="FK__DiscountC__PlanI__60A75C0F">
+          <End Type="QL_MovieModel.SubscriptionPlans" Role="SubscriptionPlans" Multiplicity="0..1" />
+          <End Type="QL_MovieModel.DiscountCodes" Role="DiscountCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscriptionPlans">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="DiscountCodes">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__PlanID__656C112C">
+          <End Type="QL_MovieModel.SubscriptionPlans" Role="SubscriptionPlans" Multiplicity="0..1" />
+          <End Type="QL_MovieModel.Payments" Role="Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscriptionPlans">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__UserID__6477ECF3">
+          <End Type="QL_MovieModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="QL_MovieModel.Payments" Role="Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdminMovie">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameAd" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UsernameAd" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AvartarURL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MENUs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="OrderNumber" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QL_MovieModelStoreContainer" CdmEntityContainer="MovieEntities">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="QL_MovieModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Episodes">
+            <EntityTypeMapping TypeName="QL_MovieModel.Episodes">
+              <MappingFragment StoreEntitySet="Episodes">
+                <ScalarProperty Name="EpisodeID" ColumnName="EpisodeID" />
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+                <ScalarProperty Name="EpisodeNumber" ColumnName="EpisodeNumber" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favorites">
+            <EntityTypeMapping TypeName="QL_MovieModel.Favorites">
+              <MappingFragment StoreEntitySet="Favorites">
+                <ScalarProperty Name="FavoriteID" ColumnName="FavoriteID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="QL_MovieModel.Ratings">
+              <MappingFragment StoreEntitySet="Ratings">
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="DateRated" ColumnName="DateRated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seasons">
+            <EntityTypeMapping TypeName="QL_MovieModel.Seasons">
+              <MappingFragment StoreEntitySet="Seasons">
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="SeasonNumber" ColumnName="SeasonNumber" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="TotalEpisodes" ColumnName="TotalEpisodes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QL_MovieModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QL_MovieModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="TimeVIP" ColumnName="TimeVIP" />
+                <ScalarProperty Name="levelVIP" ColumnName="levelVIP" />
+                <ScalarProperty Name="AvatarURL" ColumnName="AvatarURL" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WatchHistory">
+            <EntityTypeMapping TypeName="QL_MovieModel.WatchHistory">
+              <MappingFragment StoreEntitySet="WatchHistory">
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateWatched" ColumnName="DateWatched" />
+                <ScalarProperty Name="Progress" ColumnName="Progress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="QL_MovieModel.Genres">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="QL_MovieModel.Movies">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="VIPType" ColumnName="VIPType" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="MovieURL" ColumnName="MovieURL" />
+                <ScalarProperty Name="TrailerURL" ColumnName="TrailerURL" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MovieGenres" TypeName="QL_MovieModel.MovieGenres" StoreEntitySet="MovieGenres">
+            <EndProperty Name="Movies">
+              <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+            </EndProperty>
+            <EndProperty Name="Genres">
+              <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="PosterMovie">
+            <EntityTypeMapping TypeName="QL_MovieModel.PosterMovie">
+              <MappingFragment StoreEntitySet="PosterMovie">
+                <ScalarProperty Name="SliderOrder" ColumnName="SliderOrder" />
+                <ScalarProperty Name="IsSlider" ColumnName="IsSlider" />
+                <ScalarProperty Name="PosterURL" ColumnName="PosterURL" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="PosterID" ColumnName="PosterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiscountCodes">
+            <EntityTypeMapping TypeName="QL_MovieModel.DiscountCodes">
+              <MappingFragment StoreEntitySet="DiscountCodes">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="QL_MovieModel.Payments">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="TransactionStatus" ColumnName="TransactionStatus" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="SubscriptionDuration" ColumnName="SubscriptionDuration" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscriptionPlans">
+            <EntityTypeMapping TypeName="QL_MovieModel.SubscriptionPlans">
+              <MappingFragment StoreEntitySet="SubscriptionPlans">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="VipContentAccess" ColumnName="VipContentAccess" />
+                <ScalarProperty Name="AdFree" ColumnName="AdFree" />
+                <ScalarProperty Name="DevicesLimit" ColumnName="DevicesLimit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminMovie">
+            <EntityTypeMapping TypeName="QL_MovieModel.AdminMovie">
+              <MappingFragment StoreEntitySet="AdminMovie">
+                <ScalarProperty Name="AvartarURL" ColumnName="AvartarURL" />
+                <ScalarProperty Name="PasswordAd" ColumnName="PasswordAd" />
+                <ScalarProperty Name="UsernameAd" ColumnName="UsernameAd" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NameAd" ColumnName="NameAd" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENUs">
+            <EntityTypeMapping TypeName="QL_MovieModel.MENUs">
+              <MappingFragment StoreEntitySet="MENUs">
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="MenuLink" ColumnName="MenuLink" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
