@@ -59,7 +59,7 @@
 
 <body>
     <div id="container">
-        @using (Html.BeginForm("DangKy", "LikeMovie", FormMethod.Post, new { @id = "registerForm", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("DangKy", "Account", FormMethod.Post, new { @id = "registerForm", enctype = "multipart/form-data" }))
         {
             <div id="nav-sign-up">
                 <div id="chu-sign-up">
@@ -94,7 +94,7 @@
                 </div>
                 <div id="nut">
                     <button type="submit" class="btn btn-primary"><span>Đăng Ký</span></button>
-                    <button type="button" onclick="window.location.href='@Url.Action("DangNhap", "LikeMovie")'"><span>Đăng Nhập</span></button>
+                    <button type="button" onclick="window.location.href='@Url.Action("DangNhap", "Account")'"><span>Đăng Nhập</span></button>
                 </div>
             </div>
         }

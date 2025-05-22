@@ -28,13 +28,13 @@
                 {
                     var khachHang = (LikeMovies.Models.Users)Session["TaiKhoan"];
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("DangXuat", "LikeMovie")">Đăng xuất</a>
+                        <a class="nav-link" href="@Url.Action("DangXuat", "Account")">Đăng xuất</a>
                     </li>
                 }
                 else
                 {
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("DangNhap", "LikeMovie")"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
+                        <a class="nav-link" href="@Url.Action("DangNhap", "Account")"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
                     </li>
                 }
             </ul>

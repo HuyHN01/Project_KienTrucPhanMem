@@ -6,7 +6,8 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace LikeMovies.Models
 {
     using System;
@@ -19,7 +20,9 @@ namespace LikeMovies.Models
         {
             this.Movies = new HashSet<Movies>();
         }
-    
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GenreID { get; set; }
         public string Name { get; set; }
     
