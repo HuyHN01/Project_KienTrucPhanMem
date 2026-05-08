@@ -86,6 +86,7 @@ namespace LikeMovies.Controllers
             Session["SubscriptionDuration"] = SubscriptionDuration; // Store SubscriptionDuration in session
 
             int paymentMethod = Convert.ToInt32(f["thanhtoan"]);
+            Session["PaymentMethod"] = paymentMethod;
             switch (paymentMethod)
             {
                 case 1:
@@ -128,6 +129,11 @@ namespace LikeMovies.Controllers
             return Redirect(paymentUrl);
         }
 
+        public ActionResult PaymentMomo()
+        {
+            return RedirectToAction("CreatePayment");
+        }
+
         public ActionResult PaymentConfirm()
         {
             if (Request.QueryString.Count > 0)
@@ -155,12 +161,13 @@ namespace LikeMovies.Controllers
                     if (vnp_ResponseCode == "00")
                     {
                         // Lưu thông tin giao dịch thành công vào cơ sở dữ liệu
-                        luuGiaoDich("Success");
+                        luuGiaoDich("Success", 1);
 
                         // Cập nhật LevelVip và ThoiHanVIP của người dùng
                         capNhatLevelVip();
 
                         ViewBag.Message = $"Thanh toán thành công hóa đơn {orderId} | Mã giao dịch: {vnpayTranId}";
+                        return RedirectToAction("ChiTietHoaDon");
                     }
                     else
                     {
@@ -176,7 +183,7 @@ namespace LikeMovies.Controllers
         }
 
 
-        private void luuGiaoDich(string transactionstatus)
+        private void luuGiaoDich(string transactionstatus, int paymentMethod = 1)
         {
             Users kh = (Users)Session["TaiKhoan"];
             if (kh == null)
@@ -193,10 +200,11 @@ namespace LikeMovies.Controllers
                 TransactionDate = DateTime.Now,
                 TransactionStatus = transactionstatus,
                 CreatedAt = DateTime.Now,
-                PaymentMethod = 1 // Hoặc giá trị thích hợp dựa trên phương thức thanh toán
+                PaymentMethod = paymentMethod
             };
             db.Payments.Add(pay);
             db.SaveChanges();
+            Session["LastPaymentID"] = pay.PaymentID;
         }
         [HttpPost]
         public ActionResult GiaHanVip(int PlanID, int SubscriptionDuration, FormCollection f)
@@ -219,13 +227,14 @@ namespace LikeMovies.Controllers
             Session["SubscriptionDuration"] = SubscriptionDuration; 
 
             int paymentMethod = Convert.ToInt32(f["thanhtoan"]);
+            Session["PaymentMethod"] = paymentMethod;
             switch (paymentMethod)
             {
                 case 1:
                     return RedirectToAction("PaymentVNPAY");
 
                 case 2:
-                    return RedirectToAction("PaymentMomo");
+                    return RedirectToAction("CreatePayment");
 
                 default:
                     return View("Error"); 
@@ -274,6 +283,7 @@ namespace LikeMovies.Controllers
 
             db.Entry(khFromDb).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
+            Session["TaiKhoan"] = khFromDb;
         }
 
 
@@ -380,7 +390,17 @@ namespace LikeMovies.Controllers
             string resultCode = Request.QueryString["resultCode"];
             if (resultCode == "0")
             {
-                ViewBag.Message = "Thanh toán thành công!";
+                try
+                {
+                    luuGiaoDich("Success", 2);
+                    capNhatLevelVip();
+                    ViewBag.Message = "Thanh toán MoMo thành công!";
+                    return RedirectToAction("ChiTietHoaDon");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "Thanh toán MoMo thành công nhưng không cập nhật được thông tin: " + ex.Message;
+                }
             }
             else
             {
@@ -394,6 +414,41 @@ namespace LikeMovies.Controllers
         {
             // Xử lý callback từ MoMo nếu cần
             return new HttpStatusCodeResult(200);
+        }
+
+        public ActionResult ChiTietHoaDon(int? id)
+        {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("DangNhap", "LikeMovie");
+            }
+
+            Payments hoaDon;
+            var currentUser = (Users)Session["TaiKhoan"];
+
+            if (id.HasValue)
+            {
+                hoaDon = db.Payments.Find(id.Value);
+            }
+            else
+            {
+                hoaDon = db.Payments
+                    .Where(p => p.UserID == currentUser.UserID)
+                    .OrderByDescending(p => p.TransactionDate)
+                    .FirstOrDefault();
+            }
+
+            if (hoaDon == null)
+            {
+                return HttpNotFound("Không tìm thấy hóa đơn VIP của bạn.");
+            }
+
+            if (hoaDon.UserID != currentUser.UserID)
+            {
+                return HttpNotFound("Bạn không có quyền xem hóa đơn này.");
+            }
+
+            return View(hoaDon);
         }
 
     }

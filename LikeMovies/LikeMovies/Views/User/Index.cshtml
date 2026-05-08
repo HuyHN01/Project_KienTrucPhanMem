@@ -74,6 +74,9 @@
                 <p><strong>Vai trò:</strong> @(khachHang.Role == 1 ? "Quản trị viên" : "Người dùng")</p>
                 <p><strong>Cấp VIP:</strong>@khachHang.levelVIP</p>
                 <p><strong>Thời hạn VIP:</strong>@khachHang.TimeVIP</p>
+                <a href="@Url.Action("ChiTietHoaDon", "MuaVip")" class="btn btn-warning mt-3" style="background-color: #ffc107; color: #000; font-weight: bold;">
+                    Xem chi tiết hóa đơn VIP
+                </a>
             </div>
 
             <!-- Form thay đổi mật khẩu -->

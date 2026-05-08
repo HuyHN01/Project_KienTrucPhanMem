@@ -221,7 +221,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LikeMovieController.cs" />
     <Compile Include="Controllers\MuaVipController.cs" />
-    <Compile Include="Controllers\OAuthServiceController.cs" />
     <Compile Include="Controllers\PhimController.cs" />
     <Compile Include="Controllers\SearchMovieController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -763,6 +762,7 @@
     <Content Include="Views\User\GiaHanVip.cshtml" />
     <Content Include="Views\MuaVip\Error.cshtml" />
     <Content Include="Views\MuaVip\ReturnUrl.cshtml" />
+    <Content Include="Views\MuaVip\ChiTietHoaDon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

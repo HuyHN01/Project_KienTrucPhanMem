@@ -349,7 +349,7 @@ namespace LikeMovies.Controllers
                     return RedirectToAction("PaymentVNPAY", "MuaVip");
 
                 case 2:
-                    return RedirectToAction("PaymentMomo", "MuaVip");
+                    return RedirectToAction("CreatePayment", "MuaVip");
 
                 default:
                     return View("Error");
