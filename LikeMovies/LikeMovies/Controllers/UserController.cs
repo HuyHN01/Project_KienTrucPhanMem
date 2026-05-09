@@ -38,6 +38,59 @@ namespace LikeMovies.Controllers
         }
 
         [HttpGet]
+        public ActionResult ChinhSuaThongTin()
+        {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("DangNhap", "LikeMovie");
+            }
+
+            var userId = ((Users)Session["TaiKhoan"]).UserID;
+            var user = db.Users.Find(userId);
+            if (user == null)
+            {
+                return RedirectToAction("DangNhap", "LikeMovie");
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChinhSuaThongTin([Bind(Include = "UserID,UserName,Email,Role,IsActive,AvatarURL,levelVIP,TimeVIP")] Users model)
+        {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("DangNhap", "LikeMovie");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = db.Users.Find(model.UserID);
+            if (user == null)
+            {
+                return RedirectToAction("DangNhap", "LikeMovie");
+            }
+
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            user.Role = model.Role;
+            user.IsActive = model.IsActive;
+            user.AvatarURL = model.AvatarURL;
+            user.levelVIP = model.levelVIP;
+            user.TimeVIP = model.TimeVIP;
+            db.SaveChanges();
+
+            Session["TaiKhoan"] = user;
+            TempData["SuccessMessage"] = "Thông tin cá nhân đã được cập nhật.";
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public ActionResult GetAvatars()
         {
             var avatars = Directory.GetFiles(Server.MapPath("~/Images/Avatar"))
