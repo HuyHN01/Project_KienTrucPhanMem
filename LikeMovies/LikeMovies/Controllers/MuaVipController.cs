@@ -200,7 +200,7 @@ namespace LikeMovies.Controllers
                 TransactionDate = DateTime.Now,
                 TransactionStatus = transactionstatus,
                 CreatedAt = DateTime.Now,
-                PaymentMethod = paymentMethod
+                PaymentMethod = 1
             };
             db.Payments.Add(pay);
             db.SaveChanges();
@@ -297,6 +297,7 @@ namespace LikeMovies.Controllers
 
             string requestId = MomoConfig.PartnerCode + DateTime.Now.Ticks;
             string orderId = requestId;
+            Session["PendingTransaction"] = orderId;
             string amount = amountInCents.ToString(); // Số tiền thanh toán
             string orderInfo = "Thanh toán thử nghiệm MoMo";
             string extraData = ""; // Không có dữ liệu thêm
@@ -409,6 +410,7 @@ namespace LikeMovies.Controllers
             return View();
         }
 
+
         // Phương thức xử lý NotifyUrl từ MoMo
         public ActionResult NotifyUrl()
         {
@@ -441,11 +443,6 @@ namespace LikeMovies.Controllers
             if (hoaDon == null)
             {
                 return HttpNotFound("Không tìm thấy hóa đơn VIP của bạn.");
-            }
-
-            if (hoaDon.UserID != currentUser.UserID)
-            {
-                return HttpNotFound("Bạn không có quyền xem hóa đơn này.");
             }
 
             return View(hoaDon);

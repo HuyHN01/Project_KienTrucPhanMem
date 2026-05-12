@@ -34,7 +34,7 @@
 
                         @using (Html.BeginForm("ChinhSuaThongTin", "User", FormMethod.Post))
                         {
-                            @Html.AntiForgeryToken()
+                            
                             @Html.HiddenFor(model => model.UserID)
                             @Html.HiddenFor(model => model.Role)
                             @Html.HiddenFor(model => model.IsActive)

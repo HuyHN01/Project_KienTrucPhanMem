@@ -56,8 +56,8 @@ namespace LikeMovies.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChinhSuaThongTin([Bind(Include = "UserID,UserName,Email,Role,IsActive,AvatarURL,levelVIP,TimeVIP")] Users model)
+        //[ValidateAntiForgeryToken]
+        public ActionResult ChinhSuaThongTin(Users model)
         {
             if (Session["TaiKhoan"] == null)
             {
@@ -75,20 +75,16 @@ namespace LikeMovies.Controllers
                 return RedirectToAction("DangNhap", "LikeMovie");
             }
 
-            user.UserName = model.UserName;
-            user.Email = model.Email;
-            user.Role = model.Role;
-            user.IsActive = model.IsActive;
-            user.AvatarURL = model.AvatarURL;
-            user.levelVIP = model.levelVIP;
-            user.TimeVIP = model.TimeVIP;
+            UpdateModel(user);
             db.SaveChanges();
 
             Session["TaiKhoan"] = user;
             TempData["SuccessMessage"] = "Thông tin cá nhân đã được cập nhật.";
 
-            return RedirectToAction("Index");
+            return View("Index");
         }
+
+        
 
         [HttpGet]
         public ActionResult GetAvatars()
